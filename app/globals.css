@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-caption {
+    @apply text-[0.6875rem] leading-[1.2] font-normal text-text-secondary;
+  }
+
+  .text-body-small {
+    @apply text-[0.875rem] leading-[1.4] font-normal text-text-primary;
+  }
+
+  .text-heading-small {
+    @apply text-[0.875rem] leading-[1.4] font-bold text-text-primary;
+  }
+
+  .text-body {
+    @apply text-base leading-[1.5] font-normal text-text-primary;
+  }
+
+  .text-heading-medium {
+    @apply text-base leading-[1.5] font-bold text-text-primary;
+  }
+
+  .text-link {
+    @apply text-[1.125rem] leading-[1.5] font-medium text-primary underline;
+  }
+
+  .text-hero {
+    @apply text-[1.5rem] leading-[1.5] font-medium text-text-primary;
+  }
+
+  .text-heading-large {
+    @apply text-[2.25rem] leading-[1.2] font-medium text-text-primary;
+  }
+}
+
+/* Base styles */
+body {
+  @apply font-geist bg-bg-primary text-text-primary;
+}

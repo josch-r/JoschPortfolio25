@@ -1,0 +1,13 @@
+.navLink {
+  display: inline-block;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  transform-origin: center;
+  text-align: center; /* Added to center text */
+}
+
+.navLink:hover,
+.navLink:global(.active) {
+  transform: scale(1.02);
+}
+

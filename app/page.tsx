@@ -1,17 +1,39 @@
+import Link from "next/link";
+import { GridLayout } from "./components/layout/GridLayout";
+
 export default function Home() {
   return (
-    <div className="p-8 space-y-6">
-      <p className="text-caption">text-caption (11px geist regular)</p>
-      <p className="text-body-small">text-body-small (14px geist regular)</p>
-      <h3 className="text-heading-small">text-heading-small (14px geist bold)</h3>
-      <p className="text-body">text-body (16px geist regular)</p>
-      <h2 className="text-heading-medium">text-heading-medium (16px geist bold)</h2>
-      <a href="#" className="text-link block">
-        text-link (18px geist medium)
-      </a>
-      <p className="text-hero">text-hero (24px geist medium)</p>
-      <h1 className="text-heading-large">text-heading-large (36px geist medium)</h1>
-    </div>
-  )
+    <GridLayout>
+      <div className="col-span-12">
+        <h1 className="text-heading-large mb-6">Welcome to My Portfolio</h1>
+      </div>
+      <div className="col-span-6">
+        <p className="text-body mb-4">
+          Hi, I'm Josch. I'm a web developer specializing in Next.js, React, and
+          3D web experiences.
+        </p>
+      </div>
+      <div className="col-span-6">
+        <nav>
+          <ul className="flex space-x-4">
+            <li>
+              <Link href="/about" className="text-link">
+                About
+              </Link>
+            </li>
+            <li>
+              <Link href="/projects" className="text-link">
+                Projects
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="text-link">
+                Contact
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </GridLayout>
+  );
 }
-

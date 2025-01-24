@@ -21,12 +21,12 @@ const config: Config = {
         "text-dark": "#18181B",
         "primary": "#EB8333",
       },
-      spacing: {
-        xs: "8px",
-        sm: "20px",
-        md: "32px",
-        lg: "64px",
-        xl: "120px",
+      container: {
+        center: true,
+        padding: "124px",
+      },
+      gap: {
+        "5": "20px",
       },
     },
   },

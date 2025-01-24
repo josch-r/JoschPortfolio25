@@ -4,7 +4,7 @@
 
 @layer utilities {
   .text-caption {
-    @apply text-[0.6875rem] leading-[1.2] font-normal text-text-secondary;
+    @apply text-[0.6875rem] leading-[1.2] font-normal;
   }
 
   .text-body-small {

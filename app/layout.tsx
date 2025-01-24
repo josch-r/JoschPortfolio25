@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import { Footer } from "./components/layout/Footer";
 import { Navbar } from "./components/layout/Navbar";
 import "./globals.css";
+import { Providers } from "./providers";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -25,9 +26,11 @@ export default function RootLayout({
       <body
         className={`font-geist bg-bg-primary text-text-primary ${geist.className} flex flex-col min-h-screen`}
       >
-        <Navbar />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+        <Providers>
+          <Navbar />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

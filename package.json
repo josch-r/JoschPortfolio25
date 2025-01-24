@@ -9,16 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/drei": "9.120.0",
+    "@react-three/fiber": "9.0.0-rc.1",
     "autoprefixer": "^10.4.20",
     "next": "^15.1.6",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "three": "0.171.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/webpack": "^5.28.5",
     "eslint": "^9",
     "eslint-config-next": "15.1.5",
     "postcss": "^8",

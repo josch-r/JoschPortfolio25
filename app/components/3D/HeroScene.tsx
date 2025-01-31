@@ -3,7 +3,7 @@
 import { Environment, OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
-import { Perf } from "r3f-perf";
+// import { Perf } from "r3f-perf";
 import dynamic from "next/dynamic";
 import { JoschHead } from "./JoschHead";
 import { createNoise3D } from "simplex-noise";
@@ -64,7 +64,7 @@ export function HeroScene() {
           ))}
           <JoschHead />
           <OrbitControls enableZoom={false} />
-          <Perf position="bottom-left" />
+          {/* <Perf position="bottom-left" />  */}
         </Suspense>
       </Canvas>
     </div>

@@ -3,7 +3,7 @@
 import React, { useRef, useMemo } from "react"
 import { useFrame } from "@react-three/fiber"
 import { createNoise3D } from "simplex-noise"
-import { useControls } from "leva"
+// import { useControls } from "leva"
 import type * as THREE from "three"
 import { Points, PointMaterial } from "@react-three/drei"
 
@@ -14,33 +14,18 @@ const AGENT_COUNT = 20000;
 const AgentsScene = React.memo(() => {
   const pointsRef = useRef<THREE.Points>(null)
 
-  const {
-    stepSize,
-    noiseScale,
-    pointSize,
-    pointOpacity,
-    boundaryX,
-    boundaryY,
-    boundaryZNear,
-    boundaryZFar,
-    randomness,
-    timeInfluence,
-    resetProbability,
-    velocityFactor,
-  } = useControls("Noise Points", {
-    stepSize: { value: 0.03, min: 0.001, max: 0.2, step: 0.001 },
-    noiseScale: { value: 0.1, min: 0.01, max: 1, step: 0.01 },
-    pointSize: { value: 0.04, min: 0.01, max: 1, step: 0.01 },
-    pointOpacity: { value: 0.6, min: 0, max: 1, step: 0.01 },
-    boundaryX: { value: 26, min: 1, max: 50, step: 0.1 },
-    boundaryY: { value: 14, min: 1, max: 50, step: 0.1 },
-    boundaryZNear: { value: 0, min: -100, max: 0, step: 1 },
-    boundaryZFar: { value: -35, min: -200, max: -10, step: 1 },
-    randomness: { value: 0.02, min: 0, max: 1, step: 0.01 },
-    timeInfluence: { value: 0.1, min: 0, max: 1, step: 0.01 },
-    resetProbability: { value: 0.002, min: 0, max: 0.1, step: 0.0001 },
-    velocityFactor: { value: 0.05, min: 0.01, max: 0.99, step: 0.01 },
-  })
+  const stepSize = 0.03;
+  const noiseScale = 0.1;
+  const pointSize = 0.04;
+  const pointOpacity = 0.6;
+  const boundaryX = 26;
+  const boundaryY = 14;
+  const boundaryZNear = 0;
+  const boundaryZFar = -35;
+  const randomness = 0.02;
+  const timeInfluence = 0.1;
+  const resetProbability = 0.002;
+  const velocityFactor = 0.05;
 
   const [positions, colors, velocities] = useMemo(() => {
     const positions = new Float32Array(AGENT_COUNT * 3)

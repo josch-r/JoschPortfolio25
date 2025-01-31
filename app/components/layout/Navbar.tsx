@@ -15,7 +15,7 @@ export function Navbar() {
 
   return (
     <nav className="w-full fixed z-10 bg-bg-primary/50 backdrop-blur-lg py-5 shadow-sm">
-      <div className="container mx-auto px-8">
+      <div className="container mx-auto">
         <ul className="flex items-center justify-center space-x-8">
           {[
             { href: "/", label: "josch" },
@@ -26,7 +26,7 @@ export function Navbar() {
               <Link
                 href={item.href}
                 className={`
-                  text-base leading-[1.5] transition-all duration-300 ease-in-out
+                  md:text-base text-[0.875rem] leading-[1.5] transition-all duration-300 ease-in-out
                   hover:text-primary
                   ${styles.navLink}
                   ${

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { GridLayout } from "../layout/GridLayout";
+import { GridLayout } from "@/components/layout/GridLayout";
 import { Button } from "@/components/ui/button"
 
 export function AboutSection() {

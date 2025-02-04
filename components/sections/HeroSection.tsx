@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { HeroScene } from "../3D/HeroScene";
-import { GridLayout } from "../layout/GridLayout";
+import { HeroScene } from "@/components/3D/HeroScene";
+import { GridLayout } from "@/components/layout/GridLayout";
 
 export function HeroSection() {
   return (

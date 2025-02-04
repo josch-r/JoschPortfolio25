@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import { Footer } from "./components/layout/Footer";
-import { Navbar } from "./components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
 import "./globals.css";
 import { Providers } from "./providers";
 
@@ -24,13 +24,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={geist.variable}>
       <body
-        className={`font-geist bg-bg-primary text-text-primary ${geist.className} flex flex-col min-h-screen`}
+        className={`font-geist bg-bg-primary text-text-primary ${geist.className}`}
       >
+        <Navbar />
         <Providers>
-          <Navbar />
-          <main className="flex-grow">{children}</main>
-          <Footer />
+          <main>{children}</main>
         </Providers>
+        <Footer />
       </body>
     </html>
   );

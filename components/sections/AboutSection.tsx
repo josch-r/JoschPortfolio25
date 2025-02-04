@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { GridLayout } from "@/components/layout/GridLayout";
 import { Button } from "@/components/ui/button"
+import { ArrowUpRight } from "lucide-react";
 
 export function AboutSection() {
   return (
@@ -88,16 +89,7 @@ function ShortVita() {
                 className="text-body-small !text-text-secondary underline inline-flex items-center gap-1 hover:text-primary/80 transition"
               >
                 {company}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="8"
-                  height="9"
-                  viewBox="0 0 8 9"
-                  fill="none"
-                  className="fill-current flex-shrink-0"
-                >
-                  <path d="M0.750018 2.13428C0.335828 2.13428 1.76728e-05 1.79847 1.76728e-05 1.38428C1.76728e-05 0.970087 0.335828 0.634277 0.750018 0.634277H7.25C7.6642 0.634277 8 0.970087 8 1.38428V7.88426C8 8.29846 7.6642 8.63426 7.25 8.63426C6.8358 8.63426 6.5 8.29846 6.5 7.88426V3.19497L1.28033 8.41456C0.987448 8.70756 0.512578 8.70756 0.219698 8.41456C-0.0732325 8.12176 -0.0732325 7.64686 0.219698 7.35396L5.43933 2.13428H0.750018Z" />
-                </svg>
+                <ArrowUpRight size={16}/>
               </a>
               <p className="text-body-small !text-text-tertiary">{location}</p>
             </div>
@@ -144,16 +136,7 @@ function Education() {
                 className="text-body-small !text-text-secondary underline inline-flex items-center gap-1 hover:text-primary/80 transition"
               >
                 {company}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="8"
-                  height="9"
-                  viewBox="0 0 8 9"
-                  fill="none"
-                  className="fill-current flex-shrink-0"
-                >
-                  <path d="M0.750018 2.13428C0.335828 2.13428 1.76728e-05 1.79847 1.76728e-05 1.38428C1.76728e-05 0.970087 0.335828 0.634277 0.750018 0.634277H7.25C7.6642 0.634277 8 0.970087 8 1.38428V7.88426C8 8.29846 7.6642 8.63426 7.25 8.63426C6.8358 8.63426 6.5 8.29846 6.5 7.88426V3.19497L1.28033 8.41456C0.987448 8.70756 0.512578 8.70756 0.219698 8.41456C-0.0732325 8.12176 -0.0732325 7.64686 0.219698 7.35396L5.43933 2.13428H0.750018Z" />
-                </svg>
+                <ArrowUpRight size={16}/>
               </a>
               <p className="text-body-small !text-text-tertiary">{location}</p>
             </div>

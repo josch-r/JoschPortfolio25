@@ -49,10 +49,10 @@ export default function ProjectLayout({
       </div>
 
       {/* Project Links  */}
-      <div className="col-span-8 col-start-3 mt-8 flex flex-row space-x-12">
+      <div className="col-span-8 col-start-3 mt-5 flex flex-row space-x-16">
         {project.projectLinks.map((link, index) => (
           <div key={index} className="flex items-center space-x-2">
-            <ArrowUpRight />
+            <ArrowUpRight className="text-primary"/>
             <h2  className="text-link">
               <a href={link.url} target="_blank" rel="noreferrer">
                 {link.title}

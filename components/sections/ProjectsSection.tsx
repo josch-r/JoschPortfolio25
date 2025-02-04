@@ -31,9 +31,7 @@ export default function ProjectSection() {
       {projects.map(({ name, thumbnail, date, type, textColor, index }) => (
         <div
           key={index}
-          className={`col-span-1 md:col-span-12 lg:col-span-6 md:mx-8 lg:${
-            index === 1 ? "me-8" : "ms-8"
-          }`}
+          className={`col-span-1 md:col-span-12 lg:col-span-6 md:px-8 lg:px-0 ${index > 0 ? "lg:pr-8" : "lg:pl-8"}`}
         >
           <div className="relative w-full aspect-video">
             <Image

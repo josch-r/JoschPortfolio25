@@ -4,11 +4,14 @@ import { Button } from "@/components/ui/button"
 
 export function AboutSection() {
   return (
-    <section className="pt-28">
+    <section className="pt-28" id="work">
       <GridLayout>
         <AboutText />
         <ShortVita />
         <Education />
+        <div className="flex justify-end pt-auto col-span-1 md:col-span-12 md:me-8">
+        <Button variant="secondary">About me</Button>
+        </div>
       </GridLayout>
     </section>
   );
@@ -16,7 +19,7 @@ export function AboutSection() {
 
 function AboutText() {
   return (
-    <div className="col-span-4 mx-8">
+    <div className="col-span-1 md:col-span-12 lg:col-span-4 md:mx-8">
       <h2 className="text-heading-medium !font-normal mb-5">About me</h2>
       <div className="flex flex-row items-center">
         <Image
@@ -41,7 +44,6 @@ function AboutText() {
     </div>
   );
 }
-
 function ShortVita() {
   const experiences = [
     {
@@ -68,7 +70,7 @@ function ShortVita() {
   ];
 
   return (
-    <div className="col-span-4 mx-8">
+    <div className="col-span-1 md:col-span-12 lg:col-span-4 md:mx-8">
       <h2 className="text-heading-medium !font-normal mb-5">Short Vita</h2>
       <div className="grid gap-y-6">
         {experiences.map(({ year, role, company, location, link }) => (
@@ -92,7 +94,7 @@ function ShortVita() {
                   height="9"
                   viewBox="0 0 8 9"
                   fill="none"
-                  className="fill-current"
+                  className="fill-current flex-shrink-0"
                 >
                   <path d="M0.750018 2.13428C0.335828 2.13428 1.76728e-05 1.79847 1.76728e-05 1.38428C1.76728e-05 0.970087 0.335828 0.634277 0.750018 0.634277H7.25C7.6642 0.634277 8 0.970087 8 1.38428V7.88426C8 8.29846 7.6642 8.63426 7.25 8.63426C6.8358 8.63426 6.5 8.29846 6.5 7.88426V3.19497L1.28033 8.41456C0.987448 8.70756 0.512578 8.70756 0.219698 8.41456C-0.0732325 8.12176 -0.0732325 7.64686 0.219698 7.35396L5.43933 2.13428H0.750018Z" />
                 </svg>
@@ -124,7 +126,7 @@ function Education() {
   ];
 
   return (
-    <div className="col-span-4 mx-8">
+    <div className="col-span-1 md:col-span-12 lg:col-span-4 md:mx-8">
       <h2 className="text-heading-medium !font-normal mb-5">Education</h2>
       <div className="grid gap-y-6">
         {education.map(({ year, degree, company, location, link }) => (
@@ -148,7 +150,7 @@ function Education() {
                   height="9"
                   viewBox="0 0 8 9"
                   fill="none"
-                  className="fill-current"
+                  className="fill-current flex-shrink-0"
                 >
                   <path d="M0.750018 2.13428C0.335828 2.13428 1.76728e-05 1.79847 1.76728e-05 1.38428C1.76728e-05 0.970087 0.335828 0.634277 0.750018 0.634277H7.25C7.6642 0.634277 8 0.970087 8 1.38428V7.88426C8 8.29846 7.6642 8.63426 7.25 8.63426C6.8358 8.63426 6.5 8.29846 6.5 7.88426V3.19497L1.28033 8.41456C0.987448 8.70756 0.512578 8.70756 0.219698 8.41456C-0.0732325 8.12176 -0.0732325 7.64686 0.219698 7.35396L5.43933 2.13428H0.750018Z" />
                 </svg>
@@ -157,7 +159,7 @@ function Education() {
             </div>
           </div>
         ))}
-        <Button variant="secondary">Button</Button>
+       
       </div>
     </div>
   );

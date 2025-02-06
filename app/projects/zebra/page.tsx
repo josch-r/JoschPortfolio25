@@ -5,6 +5,7 @@ import { projects } from "@/lib/projectsData";
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import YouTubeEmbed from "@/components/ui/youtubeEmbeded";
 import ImageWithCaption from "@/components/ui/imgWithCaption";
+import BlockQuote from "@/components/ui/blockQuote";
 
 const slug = "zebra";
 
@@ -80,6 +81,10 @@ export default function ProjectPage() {
           caption="Nyal infront of one of our many Whiteboards"
           classprops="col-span-5"
         />
+      </section>
+
+      <section className="mt-16 col-span-8 col-start-3">
+        <BlockQuote author="— From our interviews with an audiodescription specialist" quote="Creating live audiodescriptions is extremely time-consuming and demanding. There is often not enough room for true collaboration, especially with blind authors. A tool that structures and simplifies this process could revolutionize the entire workflow and ultimately significantly improve the quality of audiodescriptions" />
       </section>
 
       <section className="mt-16 col-span-8 col-start-3 grid grid-cols-10 gap-x-5 text-body">

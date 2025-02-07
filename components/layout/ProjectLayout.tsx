@@ -66,7 +66,7 @@ export default function ProjectLayout({
         </div>
 
         {/* Project Links  */}
-        <div className="col-span-2 md:col-span-8 md:col-start-3 mt-5 flex flex-col md:flex-row md:space-x-16 space-y-2">
+        <div className="col-span-2 md:col-span-8 md:col-start-3 mt-5 flex flex-col lg:flex-row lg:space-x-16 space-y-5 lg:space-y-0">
           {project.projectLinks.map((link, index) => (
             <div key={index} className="flex items-center space-x-2">
               <ArrowUpRight className="text-primary" />

@@ -30,12 +30,14 @@
   .text-hero {
     @apply text-[1rem] sm:text-[1.5rem] leading-[1.4] font-medium antialiased text-text-primary;
   }
-
   .text-heading-large {
     @apply text-[2rem] md:text-[2.25rem] leading-[1.2] font-medium text-text-primary;
   }
   .text-quote {
     @apply text-[1.125rem] leading-[1.5] font-medium text-text-secondary;
+  }
+  .text-productname {
+    @apply font-bold text-text-secondary;
   }
 }
 

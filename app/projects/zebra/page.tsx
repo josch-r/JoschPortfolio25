@@ -79,7 +79,7 @@ export default function ProjectPage() {
               on sighted professionals, and rarely include blind authors all the
               way in the creative process. Additionally, the process of
               synchronizing descriptions with performances can be complex and
-              time-consuming. With zebra, we set out to solve these challenges
+              time-consuming. With <span className="text-productname">zebra</span>, we set out to solve these challenges
               by developing a tool that streamlines, simplifies, and empowers
               all creators—blind and sighted alike.
             </p>
@@ -88,8 +88,8 @@ export default function ProjectPage() {
               videoId="37hy9mMcZbM"
               caption="A video explaining zebra"
             />
-            <p className="text-body mt-2">
-              zebra is an innovative tool that simplifies and enhances the
+            <p className="text-body mt-5">
+              <span className="text-productname">zebra</span> is an innovative tool that simplifies and enhances the
               creation of audio descriptions for live theater. With synchronized
               scripts, role-specific views, and accessibility-focused features,
               it streamlines the workflow for both blind and sighted users. A
@@ -98,14 +98,14 @@ export default function ProjectPage() {
               Developed in close collaboration with audio description
               professionals, theater makers, and blind users, it breaks down
               barriers and makes the production of high-quality descriptions
-              more efficient. By improving accessibility, zebra helps create a
+              more efficient. By improving accessibility, <span className="text-productname">zebra</span> helps create a
               more inclusive theater experience for all.
             </p>
           </section>
           <section className="mt-16 col-span-1 md:col-span-8 md:col-start-3 grid grid-cols-10 gap-x-5">
             <h3 className="text-heading-medium col-span-10">Process</h3>
-            <p className="text-body mt-2 col-span-10 md:col-span-5">
-              Developing zebra was a deeply iterative and research-driven
+            <p className="text-body mt-2 col-span-10 lg:col-span-5">
+              Developing <span className="text-productname">zebra</span> was a deeply iterative and research-driven
               journey. We started by engaging with theater professionals,
               audiodescription experts, and blind users to understand the
               real-world challenges in the field. Through hands-on
@@ -115,14 +115,14 @@ export default function ProjectPage() {
               and user testing, refining each feature based on real-world
               feedback. Our goal was to create a tool that not only enhances
               efficiency but also fosters seamless collaboration between blind
-              and sighted creators. By integrating zebra directly into existing
+              and sighted creators. By integrating <span className="text-productname">zebra</span> directly into existing
               workflows, we ensure that accessibility is not an afterthought but
               a core part of the creative process.
             </p>
             <ImageWithCaption
               src="/images/Projects/zebra/zebraProcess.jpg"
               caption="Nyal infront of one of our many Whiteboards"
-              classprops="col-span-10 md:col-span-5 mt-5 md:mt-0"
+              classprops="col-span-10 lg:col-span-5 mt-5 lg:mt-0"
             />
           </section>
 
@@ -138,8 +138,8 @@ export default function ProjectPage() {
             <h3 className="text-heading-medium col-span-10">
               Key Features & How It Works
             </h3>
-            <p className="text-body col-span-10 mt-2 md:max-w-[50%]">
-              zebra simplifies the creation of live audiodescriptions by
+            <p className="text-body col-span-10 mt-2 lg:max-w-[50%]">
+              <span className="text-productname">zebra</span> simplifies the creation of live audiodescriptions by
               combining intuitive editing, real-time synchronization, and
               dedicated interfaces for authors and narrators.
             </p>
@@ -203,7 +203,7 @@ export default function ProjectPage() {
                 Enhancing Audiodescription with Early Collaboration
               </h3>
               <p className="mt-2">
-                zebra streamlines the entire audiodescription process by
+                <span className="text-productname">zebra</span> streamlines the entire audiodescription process by
                 allowing blind and sighted authors to collaborate
                 asynchronously. Visually impaired contributors can start working
                 on descriptions much earlier, rather than being involved only at
@@ -219,10 +219,10 @@ export default function ProjectPage() {
             </div>
           </section>
 
-          <section className="col-span-1 md:col-span-4 md:col-start-3 mt-16">
+          <section className="col-span-1 md:col-span-8 lg:col-span-4 md:col-start-3 mt-16">
             <h3 className="text-heading-medium">Round-Up</h3>
             <p className="text-body mt-2">
-              zebra is the result of an intensive research and design process,
+              <span className="text-productname">zebra</span> is the result of an intensive research and design process,
               informed by interviews, user testing, and real-world theater
               applications. Initially stepping into unfamiliar territory, we
               engaged deeply with audio description professionals, theater
@@ -235,7 +235,7 @@ export default function ProjectPage() {
               Our work is rooted in the belief that accessibility should not be
               an afterthought but a fundamental part of the creative process. By
               allowing blind authors to contribute earlier and aligning text
-              with video more efficiently, zebra significantly enhances the
+              with video more efficiently, <span className="text-productname">zebra</span> significantly enhances the
               quality of audiodescriptions while making their production more
               sustainable for theaters.
             </p>

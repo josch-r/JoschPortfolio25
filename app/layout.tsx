@@ -13,7 +13,7 @@ const geist = Geist({
 export const metadata: Metadata = {
   title: "Josch Portfolio",
   description:
-    "Personal portfolio built with Next.js 15, Tailwind, and React Three Fiber",
+    "Personal portfolio of Josch Rothenbacher, a designer and developer based in Germany.",
 };
 
 export default function RootLayout({

@@ -5,17 +5,17 @@ import React from "react";
 import { GridLayout } from "@/components/layout/GridLayout";
 import { projects } from "@/lib/projectsData";
 
-
 export default function ProjectsPage() {
   return (
     <GridLayout>
+      <section className="col-span-12 mt-20 grid grid-cols-1 lg:grid-cols-2 gap-5">
       {projects.map(
         ({ name, thumbnail, date, type, textColor, index, slug }) => (
           <Link
             key={index}
             href={`/projects/${slug}`}
-            className={`cursor-pointer col-span-12 md:col-span-12 lg:col-span-6 mt-20 ${
-              index === 1 ? "me-8" : "ms-8"
+            className={`cursor-pointer col-span-1 ${
+              index === 1 ? "lg:me-8 " : "lg:ms-8"
             }`}
           >
             <div className="relative w-full aspect-video">
@@ -24,9 +24,9 @@ export default function ProjectsPage() {
                 alt={`Thumbnail of the ${name} project`}
                 fill
                 sizes="100%"
-                className="rounded-md object-contain"
+                className="rounded-md object-cover"
               />
-              <div className="absolute bottom-0 left-0 ps-8 pb-5">
+              <div className="absolute bottom-0 left-0 ps-5 md:ps-8 pb-3 md:pb-5">
                 <h4 className={`text-hero !${textColor}`}>{name}</h4>
                 <h5 className={`text-body-small !${textColor}`}>
                   {type} | {date}
@@ -36,6 +36,7 @@ export default function ProjectsPage() {
           </Link>
         )
       )}
+      </section>
     </GridLayout>
   );
 }

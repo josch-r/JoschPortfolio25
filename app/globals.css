@@ -90,3 +90,33 @@ body {
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+
+ul.list-main {
+  list-style: none;
+  padding-left: 1rem;
+  margin: 0.75rem 0;
+}
+
+li.list-item {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  transition: all 0.2s ease;
+  @apply text-text-secondary;
+}
+
+li.list-item svg {
+  flex-shrink: 0; /* This prevents the icon from shrinking */
+  margin-top: 0.25rem; /* Aligns icon with first line of text */
+  transition: all 0.2s ease;
+  @apply text-text-secondary;
+}
+
+li.list-item:hover {
+  transform: translateX(4px);
+  @apply text-text-primary;
+}
+
+li.list-item:hover svg {
+  @apply text-text-primary;
+}

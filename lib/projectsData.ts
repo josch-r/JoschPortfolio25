@@ -38,12 +38,25 @@ export interface Project {
       type: "client",
       textColor: "text-text-primary",
       index: 1,
-      description:"Eine Stadt wird bunt is an AR App",
+      description:"UX & technical development for Eine Stadt wird bunt – an interactive exhibition blending digital media, app design, and installation technology to bring Hamburg’s graffiti history to life.",
       slug: "eswb",
       teamMembers: ["FLUUR"],
-      context: "Client / Exhibition Design / as Intern at FLUUR",
-      projectLinks: [ { title: "Project Website", url: "https://www.fluur.de/" }, {title: "Documentation", url: ""}],
+      context: "Client Work / Digital Experience & UX / as Intern at FLUUR",
+      projectLinks: [ { title: "Project Website", url: "https://www.fluur.de/" }, {title: "Exhibition", url: "https://www.shmh.de/ausstellungen/eswb/"}, {title: "ADAC Tourism Award", url:"https://presse.adac.de/regionalclubs/hansa/adac-tourismuspreis.html"}],
     },
-    // ...other projects
+    {
+      name: "Commemor",
+      thumbnail: "/images/Projects/CommemorThumbnail.jpg",
+      date: "11/2022",
+      type: "university",
+      textColor: "text-text-primary",
+      index: 2,
+      description:"UX & technical development for Eine Stadt wird bunt – an interactive exhibition blending digital media, app design, and installation technology to bring Hamburg’s graffiti history to life.",
+      slug: "eswb",
+      teamMembers: ["FLUUR"],
+      context: "Client Work / Digital Experience & UX / as Intern at FLUUR",
+      projectLinks: [ { title: "Project Website", url: "https://www.fluur.de/" }, {title: "Exhibition", url: "https://www.shmh.de/ausstellungen/eswb/"}, {title: "ADAC Tourism Award", url:"https://presse.adac.de/regionalclubs/hansa/adac-tourismuspreis.html"}],
+    },
+
   ];
   

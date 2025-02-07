@@ -84,7 +84,11 @@ export default function ProjectPage() {
       </section>
 
       <section className="mt-16 col-span-8 col-start-3">
-        <BlockQuote author="— From our interviews with an audiodescription specialist" quote="Creating live audiodescriptions is extremely time-consuming and demanding. There is often not enough room for true collaboration, especially with blind authors. A tool that structures and simplifies this process could revolutionize the entire workflow and ultimately significantly improve the quality of audiodescriptions" />
+        <BlockQuote
+          author="— From our interviews with audiodescription specialists"
+          direct={false}
+          quote="Creating live audiodescriptions is extremely time-consuming and demanding. There is often not enough room for true collaboration, especially with blind authors. A tool that structures and simplifies this process could revolutionize the entire workflow and ultimately significantly improve the quality of audiodescriptions"
+        />
       </section>
 
       <section className="mt-16 col-span-8 col-start-3 grid grid-cols-10 gap-x-5 text-body">

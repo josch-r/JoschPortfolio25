@@ -11,7 +11,7 @@ export interface Project {
     textColor: string;
     index: number;
     slug: string;
-    description?: string;
+    description: string;
     teamMembers: string[];
     context: string;
     projectLinks: Link[];

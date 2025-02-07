@@ -1,5 +1,4 @@
 // app/projects/[project]/page.tsx
-// import Image from "next/image";
 import { notFound } from "next/navigation";
 import { projects } from "@/lib/projectsData";
 import ProjectLayout from "@/components/layout/ProjectLayout";
@@ -7,11 +6,60 @@ import YouTubeEmbed from "@/components/ui/youtubeEmbeded";
 import ImageWithCaption from "@/components/ui/imgWithCaption";
 import BlockQuote from "@/components/ui/blockQuote";
 import { GridLayout } from "@/components/layout/GridLayout";
+import { Metadata } from "next";
 
 const slug = "zebra";
 
 // Optionally, look up your project data based on this slug:
 const projectData = projects.find((p) => p.slug === slug);
+
+export async function generateMetadata(): Promise<Metadata> {
+  if (!projectData) {
+    return {
+      title: "Project not found | Josch",
+      description: "Project details and insights",
+    };
+  }
+  return {
+    metadataBase: new URL("https://www.joschua-rothenbacher.de"),
+    title: `${projectData.name} | Josch`,
+    description: projectData.description || "Project details and insights",
+    keywords: [
+      "Josch Rothenbacher",
+      "Joschua Rothenbacher",
+      "Portfolio Project",
+      "zebra",
+      "inclusive design",
+      "audiodescription",
+    ],
+    authors: [{ name: "Josch Rothenbacher" }],
+    openGraph: {
+      title: `${projectData.name} - Josch Rothenbacher Portfolio`,
+      description: projectData.description,
+      type: "article",
+      url: `/projects/${projectData.slug}`,
+      images: [
+        {
+          url: projectData.thumbnail,
+          width: 1200,
+          height: 630,
+          alt: `${projectData.name} - Project Preview`,
+        },
+      ],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+  };
+}
 
 export default function ProjectPage() {
   if (!projectData) {
@@ -171,7 +219,7 @@ export default function ProjectPage() {
             </div>
           </section>
 
-          <section className="col-span-1 md:col-span-7 md:col-start-3 mt-16">
+          <section className="col-span-1 md:col-span-4 md:col-start-3 mt-16">
             <h3 className="text-heading-medium">Round-Up</h3>
             <p className="text-body mt-2">
               zebra is the result of an intensive research and design process,

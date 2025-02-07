@@ -4,6 +4,12 @@ import Link from "next/link";
 import React from "react";
 import { GridLayout } from "@/components/layout/GridLayout";
 import { projects } from "@/lib/projectsData";
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "Projects | Josch",
+  description: "A collection of projects I have worked on.",
+};
 
 export default function ProjectsPage() {
   return (

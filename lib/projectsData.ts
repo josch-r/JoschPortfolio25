@@ -54,8 +54,21 @@ export interface Project {
       description:"Commemor is an innovative augmented reality project that aims to preserve and modernize remembrance culture by bringing the stories behind Stolpersteine (memorial stones) to life through digital technology12. The project addresses the critical challenge of maintaining historical memory as fewer Holocaust survivors remain to share their firsthand accounts.",
       slug: "commemor",
       teamMembers: ["Evelin Gariung", "Vincent Paul"],
-      context: "University / 4th Semester / Invention Design II",
+      context: "University / Invention Design II – 4th Semester /  Supervised by: Ludwig Kannicht, Patrick Kenzler",
       projectLinks: [ { title: "HfG Portfolio", url: "https://portfolio.hfg-gmuend.de/s-2222/projekte/commemor" }, {title: "Stolperstein Project", url: "https://www.stolpersteine.eu/"}],
+    },
+    {
+      name: "Toxic Europe",
+      thumbnail: "/images/Projects/iksThumbnail.jpg",
+      date: "07/2022",
+      type: "university",
+      textColor: "text-text-primary",
+      index: 3,
+      description:"An interactive museum installation combining projection mapping and touch interfaces to educate visitors about Europe's toxic creatures through innovative digital storytelling and physical interaction.",
+      slug: "toxic-europe",
+      teamMembers: ["Henri Kral", "Anna Schneider", "Gül Saritas"],
+      context: "University / Digital Exhibits 4th – Semester / Supervised by: Prof. Jens Döring, Prof. Marc Guntow",
+      projectLinks: [ { title: "HfG Portfolio", url: "https://portfolio.hfg-gmuend.de/s-2222/projekte/commemor" }, {title: "Documentation", url: "https://www.tbd.com/"}],
     },
 
   ];

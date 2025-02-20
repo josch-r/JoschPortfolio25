@@ -20,9 +20,7 @@ export default function ProjectsPage() {
           <Link
             key={index}
             href={`/projects/${slug}`}
-            className={`cursor-pointer col-span-1 ${
-              index === 1 ? "lg:me-8 " : "lg:ms-8"
-            }`}
+            className={`cursor-pointer col-span-1 odd:lg:ms-8 even:lg:me-8`}
           >
             <div className="relative w-full aspect-video">
               <Image

@@ -122,6 +122,28 @@ export const projects: Project[] = [
         url: "https://protectmefromwhatiwant.netlify.app/",
       },
       { title: "One Sec", url: "https://one-sec.app/" },
+      {title: "Doku", url: "https://www.tbd.com/"},
+    ],
+  },
+  {
+    name: "Wildwarner",
+    thumbnail: "/images/Projects/wiwaThumbnail.jpg",
+    date: "12/2021",
+    type: "university",
+    textColor: "text-text-primary",
+    index: 5,
+    description:
+      "WiWa uses smart sensors and cameras on roads to detect wildlife and alert drivers, helping prevent animal-vehicle accidents through an advanced warning system",
+    slug: "wiwa",
+    teamMembers: ["Fabienne Vatter"],
+    context:
+      "University / Prototyping Resdesign – 3rd Semester / Supervised by: Prof. Michael Schuster, Benjamin Thomsen",
+    projectLinks: [
+      {
+        title: "HfG Portfolio",
+        url: "https://portfolio.hfg-gmuend.de/w-2122/projekte/wiwa-ein-wildwechsel-warnsystem",
+      },
+      {title: "Doku", url: "https://www.tbd.com/"},
     ],
   },
 ];

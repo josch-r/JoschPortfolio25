@@ -1,0 +1,33 @@
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.galleryItem {
+  position: relative;
+  break-inside: avoid;
+}
+
+.captionOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  border-radius: 0.5rem;
+}
+
+.imageCaption {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  right: 0.5rem;
+  color: white;
+  font-size: 0.875rem;
+  padding: 0.5rem;
+}

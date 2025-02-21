@@ -21,9 +21,9 @@ export default function BlockQuote({
       )}
     >
       <blockquote className="text-quote">
-        {direct ? `&ldquo;${quote}&rdquo;` : `${quote}`}
+        {direct ? `„${quote}"` : `${quote}`}
       </blockquote>
-      <p className="text-body !text-text-tertiary mt-2">{author}</p>
+      <p className="text-body !text-text-tertiary mt-2">{author} </p>
     </figure>
   );
 }

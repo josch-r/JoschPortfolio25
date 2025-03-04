@@ -33,7 +33,10 @@ export const projects: Project[] = [
       "University / Bachelorthesis at HfG Gmünd / Supervised by: Jens Döring, Fabian Rauch",
     projectLinks: [
       { title: "Project Website", url: "https://zebra-linktree.vercel.app/" },
-      { title: "Documentation", url: "/pdf/zebraDoc" },
+      {
+        title: "Documentation",
+        url: "https://drive.google.com/file/d/1bIWaY4AjlHBzkndE-c-0E0NXKvLB0P4N/view?usp=sharing",
+      },
       {
         title: "UX-Design-Awards",
         url: "https://ux-design-awards.com/winners/2025-1-zebra",
@@ -100,7 +103,10 @@ export const projects: Project[] = [
         title: "HfG Portfolio",
         url: "https://portfolio.hfg-gmuend.de/s-2222/projekte/commemor",
       },
-      { title: "Documentation", url: "https://www.tbd.com/" },
+      {
+        title: "Documentation",
+        url: "https://drive.google.com/file/d/1UC1pWwVjLIYzh4AGZVo6q5B-Y5FdzMwZ/view?usp=sharing",
+      },
     ],
   },
   {
@@ -122,7 +128,7 @@ export const projects: Project[] = [
         url: "https://protectmefromwhatiwant.netlify.app/",
       },
       { title: "One Sec", url: "https://one-sec.app/" },
-      {title: "Doku", url: "https://www.tbd.com/"},
+      { title: "Doku", url: "https://www.tbd.com/" },
     ],
   },
   {
@@ -143,7 +149,7 @@ export const projects: Project[] = [
         title: "HfG Portfolio",
         url: "https://portfolio.hfg-gmuend.de/w-2122/projekte/wiwa-ein-wildwechsel-warnsystem",
       },
-      {title: "Doku", url: "https://www.tbd.com/"},
+      { title: "Doku", url: "https://www.tbd.com/" },
     ],
   },
 ];

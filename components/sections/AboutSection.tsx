@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { GridLayout } from "@/components/layout/GridLayout";
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 export function AboutSection() {
   return (
@@ -11,7 +12,9 @@ export function AboutSection() {
         <ShortVita />
         <Education />
         <div className="flex justify-end pt-auto col-span-1 md:col-span-12 md:me-8">
-        <Button variant="secondary">About me</Button>
+          <Link href="/about">
+            <Button variant="secondary">About me</Button>
+          </Link>
         </div>
       </GridLayout>
     </section>
@@ -89,7 +92,7 @@ function ShortVita() {
                 className="text-body-small !text-text-secondary underline inline-flex items-center gap-1 hover:text-primary/80 transition"
               >
                 {company}
-                <ArrowUpRight size={16}/>
+                <ArrowUpRight size={16} />
               </a>
               <p className="text-body-small !text-text-tertiary">{location}</p>
             </div>
@@ -136,13 +139,12 @@ function Education() {
                 className="text-body-small !text-text-secondary underline inline-flex items-center gap-1 hover:text-primary/80 transition"
               >
                 {company}
-                <ArrowUpRight size={16}/>
+                <ArrowUpRight size={16} />
               </a>
               <p className="text-body-small !text-text-tertiary">{location}</p>
             </div>
           </div>
         ))}
-       
       </div>
     </div>
   );

@@ -33,7 +33,7 @@ export const projects: Project[] = [
       "University / Bachelorthesis at HfG Gmünd / Supervised by: Jens Döring, Fabian Rauch",
     projectLinks: [
       { title: "Project Website", url: "https://zebra-linktree.vercel.app/" },
-      { title: "Documentation", url: "todo" },
+      { title: "Documentation", url: "/pdf/zebraDoc" },
       {
         title: "UX-Design-Awards",
         url: "https://ux-design-awards.com/winners/2025-1-zebra",

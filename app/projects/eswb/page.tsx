@@ -83,7 +83,7 @@ export default function ProjectPage() {
             </p>
 
             <YouTubeEmbed
-              videoId="biry8-XlDbE"
+              videoId="Q7xRKDXmAJs"
               caption="A video showcasing the App for Eine Stadt wird bunt. Courtesy: FLUUR"
             />
           </section>

@@ -6,12 +6,12 @@ export function Footer() {
     <footer className="text-center py-5 text-text-tertiary text-caption ">
       <p>Built from hand with &lt;3</p>
       <p>
-        <Link href="/impressum" className="underline">
-          Impressum
+        <Link href="/imprint" className="underline">
+          Imprint
         </Link>{" "}
         |{" "}
-        <Link href="/datenschutz" className="underline">
-          Datenschutzerklärung
+        <Link href="/privacy-policy" className="underline">
+          Privacy Policy
         </Link>
       </p>
       <p className="pt-2">

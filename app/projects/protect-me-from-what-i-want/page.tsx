@@ -7,6 +7,8 @@ import { ArrowRight } from "lucide-react";
 import { GridLayout } from "@/components/layout/GridLayout";
 import { Metadata } from "next";
 import BlockQuote from "@/components/ui/blockQuote";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const slug = "protect-me-from-what-i-want";
 
@@ -214,6 +216,9 @@ export default function ProjectPage() {
               subsequent Bachelor&apos;s thesis.
             </p>
           </section>
+          <Link className="flex justify-end md:col-start-3 md:col-span-8 my-2" href={`/projects/` + projects[projectData.index + 1 < projects.length ? projectData.index + 1 : 0].slug}>
+            <Button variant="default">Next Project</Button>
+          </Link>
         </GridLayout>
       </ProjectLayout>
     </>

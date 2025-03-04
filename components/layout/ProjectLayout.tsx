@@ -31,7 +31,7 @@ export default function ProjectLayout({
           content={`https://joschua-rothenbacher.de/projects/${project.slug}`}
         />
       </Head>
-      <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-6 md:px-[124px]">
+      <div className="grid grid-cols-2 md:grid-cols-12 gap-5 px-6 md:px-[124px] 2xl:px-[248px]">
         <Link
           href="/projects"
           className="md:col-start-2 mt-20 md:mt-[120px] md:flex items-center justify-start md:justify-end hidden"

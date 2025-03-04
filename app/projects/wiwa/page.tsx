@@ -6,6 +6,8 @@ import YouTubeEmbed from "@/components/ui/youtubeEmbeded";
 import ImageWithCaption from "@/components/ui/imgWithCaption";
 import { GridLayout } from "@/components/layout/GridLayout";
 import { Metadata } from "next";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const slug = "wiwa";
 
@@ -169,6 +171,9 @@ export default function ProjectPage() {
               classprops="col-span-1 md:col-span-8 md:col-start-3 mt-5"
             />
           </section>
+          <Link className="flex justify-end md:col-start-3 md:col-span-8 my-2" href={`/projects/` + projects[projectData.index + 1 < projects.length ? projectData.index + 1 : 0].slug}>
+            <Button variant="default">Next Project</Button>
+          </Link>
         </GridLayout>
       </ProjectLayout>
     </>

@@ -55,7 +55,7 @@ interface Image {
 const images: Image[] = [
   
   {
-    src: "/images/about/gallery/2.jpg",
+    src: "/images/about/gallery/2.JPG",
     caption: "Analog photography: more stickers?",
     id: 0,
   },
@@ -65,32 +65,32 @@ const images: Image[] = [
     id: 1,
   },
   {
-    src: "/images/about/gallery/3.jpg",
+    src: "/images/about/gallery/3.JPG",
     caption: "In the mountains, Photography by Luna Klöss",
     id: 2,
   },
   {
-    src: "/images/about/gallery/4.jpg",
+    src: "/images/about/gallery/4.JPG",
     caption: "Analog photography: going surfing",
     id: 3,
   },
   {
-    src: "/images/about/gallery/5.jpg",
+    src: "/images/about/gallery/5.JPG",
     caption: "Analog photography: Me going surfing",
     id: 4,
   },
   {
-    src: "/images/about/gallery/7.jpg",
+    src: "/images/about/gallery/7.JPG",
     caption: "Me in Luna's exhibition about places of retreat",
     id: 5,
   },
   {
-    src: "/images/about/gallery/6.jpg",
+    src: "/images/about/gallery/6.JPG",
     caption: "Analog photography",
     id: 6,
   },
   {
-    src: "/images/about/gallery/8.jpg",
+    src: "/images/about/gallery/8.JPG",
     caption: "Spinning some tunes",
     id: 8,
   },

@@ -36,7 +36,7 @@ export default function ProjectSection() {
           }`}
         >
           <Link href={`/projects/${name.toLowerCase()}`}>
-            <div className="relative w-full aspect-video">
+            <div className="relative w-full aspect-video cursor-pointer">
               <Image
                 src={thumbnail}
                 alt={`Thumbnail of the ${name} project`}
@@ -55,7 +55,7 @@ export default function ProjectSection() {
       ))}
       <div className="flex justify-end pt-auto col-span-1 md:col-span-12 md:me-8">
         <Link href="/projects">
-          <Button variant="default">View all projects</Button>
+          <Button variant="default" className="cursor-pointer">View all projects</Button>
         </Link>
       </div>
     </GridLayout>

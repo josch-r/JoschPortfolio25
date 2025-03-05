@@ -62,6 +62,42 @@ const Agent = React.memo(({ radius }: { radius: number }) => {
   );
 });
 
+// Add this hook to your component
+const useResponsiveKnobGroup = () => {
+  const [position, setPosition] = useState<[number, number, number]>([12, -6, -7]);
+  const [rotation, setRotation] = useState<[number, number, number]>([-0.2, -0.6, 0]);
+  
+  useEffect(() => {
+    const handleResize = () => {
+      // Mobile (< 768px)
+      if (window.innerWidth < 768) {
+        setPosition([0, -8, -8] as [number, number, number]);
+        setRotation([0, 0, 0] as [number, number, number]);
+      } 
+      // Tablet (768px - 1024px)
+      else if (window.innerWidth < 1280) {
+        setPosition([0, -7, -6] as [number, number, number]);
+        setRotation([0, 0, 0] as [number, number, number]);
+      } 
+      // Desktop
+      else {
+        setPosition([12, -6, -7] as [number, number, number]);
+        setRotation([-0.2, -0.6, 0] as [number, number, number]);
+      }
+    };
+    
+    // Set initial position
+    handleResize();
+    
+    // Update on resize
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
+  return {position, rotation};
+};
+
+
 // Add displayName for better debugging
 Agent.displayName = "Agent";
 
@@ -73,7 +109,6 @@ export function HeroScene() {
 
   const [particleCount, setParticleCount] = useState(20000);
 
-  // Optional: Add device detection to set initial count
   useEffect(() => {
     // Simple device detection
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -93,6 +128,9 @@ export function HeroScene() {
     }
     // High-end devices keep the default 20000
   }, []);
+
+  // Get responsive position and rotation for knob group
+  const { position: knobGroupPosition, rotation: knobGroupRotation } = useResponsiveKnobGroup();
 
   return (
     <div className="absolute w-full h-[100vh]">
@@ -115,7 +153,7 @@ export function HeroScene() {
           ))}
 
           {/* 3D Knobs */}
-          <group position={[12, -6, -7]} rotation={[-0.2, -0.6, 0]}>
+          <group position={knobGroupPosition} rotation={knobGroupRotation}>
             <pointLight
               position={[0, 0, 2]}
               intensity={0.2}
@@ -135,7 +173,7 @@ export function HeroScene() {
               decay={1}
             />
             <Text
-              position={[0, -1.2, 0]}
+              position={[0, -1, 0]}
               fontSize={0.2}
               color={"#949494"}
               anchorX="center"
@@ -148,7 +186,7 @@ export function HeroScene() {
               position={[-1.5, 0, 0]}
               name="Step Size"
               value={stepSize}
-              min={0.005}
+              min={0.001}
               max={0.2}
               onChange={setStepSize}
             />
@@ -156,7 +194,7 @@ export function HeroScene() {
               position={[0, 0, 0]}
               name="Noise Scale"
               value={noiseScale}
-              min={0.005}
+              min={0.001}
               max={0.7}
               onChange={setNoiseScale}
             />

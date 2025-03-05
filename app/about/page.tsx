@@ -99,7 +99,7 @@ const images: Image[] = [
 export default function About() {
   return (
     <GridLayout>
-      <section className="col-span-1 lg:col-start-3 lg:col-span-4 mt-20">
+      <section className="col-span-1 md:col-start-3 md:col-span-4 mt-20">
         <h1 className="text-heading-large">About me</h1>
         <p className="text-body mt-8">
           I&apos;m a creative technologist passionate about blending design and
@@ -111,11 +111,11 @@ export default function About() {
           addresses real needs with thoughtfulness and care.
         </p>
       </section>
-      <section className="col-span-1 lg:col-start-7 lg:col-span-4 lg:mt-32">
+      <section className="col-span-1 md:col-start-7 md:col-span-4 md:mt-32">
         <ImageWithCaption classprops="w-full" src="/images/about/profile.png" caption="Portrait of me" />
       </section>
 
-      <section className="col-span-1 lg:col-start-3 lg:col-span-8 mt-12 lg:mt-32">
+      <section className="col-span-1 md:col-start-3 md:col-span-8 mt-12 md:mt-32">
         <h2 className="text-heading-medium">How I work</h2>
         <p className="text-body mt-2">
           Collaboration, adaptability, and iterative design are the foundation
@@ -130,14 +130,14 @@ export default function About() {
       <ImageWithCaption
         src="/images/about/desk.jpg"
         caption="Momentary snapshot of my desk, whilst creating this page!"
-        classprops="col-span-1 lg:col-start-3 lg:col-span-4"
+        classprops="col-span-1 md:col-start-3 md:col-span-4"
       />
       <ImageWithCaption
         src="/images/about/arGlasses.jpg"
         caption="Testing VR-Gloves at the Immersive Tech Week 2022 in Rotterdam"
-        classprops="col-span-1 lg:col-start-7 lg:col-span-4"
+        classprops="col-span-1 md:col-start-7 md:col-span-4"
       />
-      <section className="col-span-1 lg:col-start-3 lg:col-span-4 mt-2">
+      <section className="col-span-1 md:col-start-3 md:col-span-4 mt-2">
         <p>
           I prioritize rapid prototyping to test ideas early and refine them
           based on feedback. Whether using tools like Figma, Arduino, 3D
@@ -148,7 +148,7 @@ export default function About() {
           functional and user-centered results.
         </p>
       </section>
-      <section className="col-span-1 lg:col-start-7 lg:col-span-4 mt-2">
+      <section className="col-span-1 md:col-start-7 md:col-span-4 mt-2">
         <p>
           During our Bachelor&apos;s project, for example, my team and I combined
           iterative prototyping and user collaboration to develop a tool for
@@ -159,7 +159,7 @@ export default function About() {
         </p>
       </section>
 
-      <section className="col-span-1 lg:col-start-3 lg:col-span-8 mt-12 lg:mt-32">
+      <section className="col-span-1 md:col-start-3 md:col-span-8 mt-12 md:mt-32">
         <h3 className="text-heading-medium">What else?</h3>
         <p className="mt-2">Besides Design, coding and technology, I enjoy DJing, analog photography, and cycling. Below are some of my favorite pictures—welcome to my gallery.</p>
       </section>

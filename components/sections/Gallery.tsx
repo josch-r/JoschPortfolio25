@@ -46,7 +46,7 @@ export default function Gallery({ images }: GalleryProps) {
   }
 
   return (
-    <section className="lg:col-start-3 lg:col-span-8 mt-8">
+    <section className="md:col-start-3 md:col-span-8 mt-8">
       <div className={styles.gallery}>
         <div className={styles.column}>
           {leftColumnImages.map((img) => (

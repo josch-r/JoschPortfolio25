@@ -173,7 +173,7 @@ export function HeroScene() {
               decay={1}
             />
             <Text
-              position={[0, -1, 0]}
+              position={[0, -1.1, 0]}
               fontSize={0.2}
               color={"#949494"}
               anchorX="center"

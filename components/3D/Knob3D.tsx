@@ -17,7 +17,7 @@ export const Knob3D = React.memo(
     const knobRef = useRef<Group>(null);
     const [isDragging, setIsDragging] = useState<boolean>(false);
     const [lastMouseX, setLastMouseX] = useState<number>(0);
-    const [lastMouseY, setLastMouseY] = useState<number>(0);
+    // const [lastMouseY, setLastMouseY] = useState<number>(0);
     const valueRef = useRef(value);
 
     const { nodes, materials } = useGLTF("models/knob-transformed.glb");
@@ -96,7 +96,7 @@ export const Knob3D = React.memo(
       e.stopPropagation();
       setIsDragging(true);
       setLastMouseX(e.clientX);
-      setLastMouseY(e.clientY);
+      // setLastMouseY(e.clientY);
     };
 
     return (

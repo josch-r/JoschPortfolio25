@@ -43,40 +43,54 @@ export const Knob3D = React.memo(
     // Handle global mouse events for continuous dragging
     useEffect(() => {
       if (!isDragging) return;
-
+    
       let prevX = lastMouseX;
       let currentValue = valueRef.current;
-
-      const handleMouseMove = (e: MouseEvent) => {
-        const deltaX = e.clientX - prevX;
-
-        // Adjust rotation calculation for more intuitive control
-        // Swap deltaX and deltaY for horizontal rotation
+    
+      const handleMouseMove = (e: MouseEvent | TouchEvent) => {
+        // Get client X position from either mouse or touch event
+        const clientX = 'touches' in e 
+          ? e.touches[0].clientX 
+          : (e as MouseEvent).clientX;
+        
+        const deltaX = clientX - prevX;
         const rotationDelta = deltaX * 0.01;
-
+        
         // Map rotation to value change
         const valueDelta = (rotationDelta * (max - min)) / Math.PI;
         currentValue = Math.min(max, Math.max(min, currentValue + valueDelta));
-
+    
         onChange(currentValue);
         valueRef.current = currentValue;
-
-        // Update previous positions
-        prevX = e.clientX;
+    
+        // Update previous position
+        prevX = clientX;
       };
-
-      const handleMouseUp = () => {
+    
+      const handleEnd = () => {
         setIsDragging(false);
       };
-
+    
+      // Mouse events
       window.addEventListener("mousemove", handleMouseMove);
-      window.addEventListener("mouseup", handleMouseUp);
-
+      window.addEventListener("mouseup", handleEnd);
+      
+      // Touch events
+      window.addEventListener("touchmove", handleMouseMove);
+      window.addEventListener("touchend", handleEnd);
+      window.addEventListener("touchcancel", handleEnd);
+    
       return () => {
+        // Remove mouse events
         window.removeEventListener("mousemove", handleMouseMove);
-        window.removeEventListener("mouseup", handleMouseUp);
+        window.removeEventListener("mouseup", handleEnd);
+        
+        // Remove touch events
+        window.removeEventListener("touchmove", handleMouseMove);
+        window.removeEventListener("touchend", handleEnd);
+        window.removeEventListener("touchcancel", handleEnd);
       };
-    }, [isDragging, lastMouseX, lastMouseY, max, min, onChange]);
+    }, [isDragging, lastMouseX, max, min, onChange]);
 
     const handlePointerDown = (e: PointerEvent) => {
       e.stopPropagation();

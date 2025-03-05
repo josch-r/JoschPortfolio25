@@ -47,10 +47,10 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <>
+    <div className="scroll-smooth">
       <HeroSection />
       <AboutSection />
       <ProjectSection />
-    </>
+    </div>
   );
 }

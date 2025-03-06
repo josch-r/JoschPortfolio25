@@ -15,13 +15,13 @@ export default function ImageWithCaption({
     <div className={classprops}>
       <Image
         src={src}
-        alt="zebra screenshot"
+        alt={caption}
         width={2048} // Intrinsic width 2048 × 1536
         height={1536} // Intrinsic height (change as needed)
         sizes="100%"
         className="w-full h-auto rounded-md object-contain"
       />
-      <p className="text-caption !text-text-tertiary mt-2 col-span-4 col-start-7 ms-2">
+      <p className="text-caption !text-text-tertiary mt-2 col-span-4 col-start-7 ms-2" aria-hidden="true">
         {caption}
       </p>
     </div>

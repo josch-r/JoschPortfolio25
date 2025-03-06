@@ -99,8 +99,8 @@ const images: Image[] = [
 export default function About() {
   return (
     <GridLayout>
-      <section className="col-span-1 md:col-start-3 md:col-span-4 mt-20">
-        <h1 className="text-heading-large">About me</h1>
+      <section className="col-span-1 md:col-start-3 md:col-span-4 mt-20" aria-labelledby="about-heading">
+        <h1 className="text-heading-large" id="about-heading">About me</h1>
         <p className="text-body mt-8">
           I&apos;m a creative technologist passionate about blending design and
           technology to create human-centered solutions. My journey is driven by

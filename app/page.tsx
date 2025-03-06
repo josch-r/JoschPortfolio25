@@ -43,6 +43,26 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  other: {
+    'application/ld+json': JSON.stringify([
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Josch Rothenbacher",
+        "url": "https://www.joschua-rothenbacher.de",
+        "jobTitle": "Digital Product Designer & Developer",
+        "knowsAbout": ["Digital Product Design", "XR Development", "Web Technologies", "Physical Prototyping", "UX Design"],
+        "image": "https://www.joschua-rothenbacher.de/images/joschSketchTransparent.png"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Josch Rothenbacher Portfolio",
+        "url": "https://www.joschua-rothenbacher.de",
+        "description": "Portfolio showcasing digital product design, XR development, and physical prototyping projects"
+      }
+    ])
+  }
 };
 
 export default function Home() {

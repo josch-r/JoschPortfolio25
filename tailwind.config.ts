@@ -19,7 +19,7 @@ const config: Config = {
         "bg-button-primary": "#FAFAFA",
         "text-primary": "#F5F5F5",
         "text-secondary": "#DADADA",
-        "text-tertiary": "#949494",
+        "text-tertiary": "#9B9B9B",
         "text-dark": "#18181B",
         primary: "#EB8333",
 

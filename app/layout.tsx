@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import "./globals.css";
 import { Providers } from "./providers";
+import { Analytics } from '@vercel/analytics/next';
 
 const geist = Geist({
   subsets: ["latin"],
@@ -23,6 +24,7 @@ export default function RootLayout({
         <Navbar />
         <Providers>
           <main>{children}</main>
+          <Analytics />
         </Providers>
         <Footer />
       </body>

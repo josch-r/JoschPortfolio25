@@ -6,13 +6,13 @@ import Link from "next/link";
 
 export function AboutSection() {
   return (
-    <section className="pt-28" id="work">
+    <section className="pt-28" id="work" aria-labelledby="about-heading">
       <GridLayout>
         <AboutText />
         <ShortVita />
         <Education />
         <div className="flex justify-end pt-auto col-span-1 md:col-span-12 md:me-8">
-          <Link href="/about">
+          <Link href="/about" aria-label="About me">
             <Button variant="secondary">About me</Button>
           </Link>
         </div>
@@ -24,18 +24,18 @@ export function AboutSection() {
 function AboutText() {
   return (
     <div className="col-span-1 md:col-span-12 lg:col-span-4 md:mx-8">
-      <h2 className="text-heading-medium !font-normal mb-5">About me</h2>
+      <h2 className="text-heading-medium !font-normal mb-5" id="about-heading">About me</h2>
       <div className="flex flex-row items-center">
         <Image
           src="/images/joschSketch.png"
           width={80}
           height={80}
-          alt="Portrait shot of Josch, wearing a dark outfit"
+          alt="Joschua Rothenbacher, Creative technologist. Sketch."
           className="rounded-full object-cover"
         />
         <div className="ml-5 flex flex-col">
-          <p className="text-body">Joschua Rothenbacher</p>
-          <p className="text-text-tertiary">Creative Technologist</p>
+          <h3 className="text-body">Joschua Rothenbacher</h3>
+          <h4 className="text-text-tertiary">Creative Technologist</h4>
         </div>
       </div>
       <p className="text-body-small !text-text-secondary mt-4">
@@ -90,9 +90,10 @@ function ShortVita() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-body-small !text-text-secondary underline inline-flex items-center gap-1 hover:text-primary/80 transition"
+                aria-label={`Visit ${company} website`}
               >
                 {company}
-                <ArrowUpRight size={16} />
+                <ArrowUpRight size={16} aria-hidden="true" />
               </a>
               <p className="text-body-small !text-text-tertiary">{location}</p>
             </div>
@@ -137,9 +138,10 @@ function Education() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-body-small !text-text-secondary underline inline-flex items-center gap-1 hover:text-primary/80 transition"
+                aria-label={`Visit ${company} website`}
               >
                 {company}
-                <ArrowUpRight size={16} />
+                <ArrowUpRight size={16} aria-hidden="true" />
               </a>
               <p className="text-body-small !text-text-tertiary">{location}</p>
             </div>

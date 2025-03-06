@@ -24,40 +24,42 @@ export default function ProjectSection() {
   ];
 
   return (
-    <GridLayout>
-      <h2 className="col-span-1 md:col-span-12 text-heading-medium !font-normal md:ms-8 mt-16">
-        Selected Work
-      </h2>
-      {projects.map(({ name, thumbnail, date, type, textColor, index }) => (
-        <div
-          key={index}
-          className={`col-span-1 md:col-span-12 lg:col-span-6 md:px-8 lg:px-0 ${
-            index > 0 ? "lg:pr-8" : "lg:pl-8"
-          }`}
-        >
-          <Link href={`/projects/${name.toLowerCase()}`}>
-            <div className="relative w-full aspect-video cursor-pointer">
-              <Image
-                src={thumbnail}
-                alt={`Thumbnail of the ${name} project`}
-                fill
-                className="rounded-md object-contain"
-              />
-              <div className="absolute bottom-0 left-0 ps-8 pb-5">
-                <h4 className={`text-hero !${textColor}`}>{name}</h4>
-                <h5 className={`text-body-small !${textColor}`}>
-                  {type} | {date}
-                </h5>
+    <GridLayout aria-labelledby="projects-heading">
+        <h2 className="col-span-1 md:col-span-12 text-heading-medium !font-normal md:ms-8 mt-16" id="projects-heading">
+          Selected Work
+        </h2>
+        {projects.map(({ name, thumbnail, date, type, textColor, index }) => (
+          <div
+            key={index}
+            className={`col-span-1 md:col-span-12 lg:col-span-6 md:px-8 lg:px-0 ${
+              index > 0 ? "lg:pr-8" : "lg:pl-8"
+            }`}
+          >
+            <Link href={`/projects/${name.toLowerCase()}`}>
+              <div className="relative w-full aspect-video cursor-pointer">
+                <Image
+                  src={thumbnail}
+                  alt={`${name} project thumbnail - ${type}`} 
+                  fill
+                  className="rounded-md object-contain"
+                />
+                <div className="absolute bottom-0 left-0 ps-8 pb-5">
+                  <h3 className={`text-hero !${textColor}`}>{name}</h3>
+                  <h4 className={`text-body-small !${textColor}`}>
+                    {type} | {date}
+                  </h4>
+                </div>
               </div>
-            </div>
+            </Link>
+          </div>
+        ))}
+        <div className="flex justify-end pt-auto col-span-1 md:col-span-12 md:me-8">
+          <Link href="/projects" aria-label="View all projects">
+            <Button variant="default" className="cursor-pointer">
+              View all projects
+            </Button>
           </Link>
         </div>
-      ))}
-      <div className="flex justify-end pt-auto col-span-1 md:col-span-12 md:me-8">
-        <Link href="/projects">
-          <Button variant="default" className="cursor-pointer">View all projects</Button>
-        </Link>
-      </div>
     </GridLayout>
   );
 }

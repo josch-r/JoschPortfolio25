@@ -3,35 +3,31 @@ import { Project } from "./projectsData";
   export const archivedProjects: Project[] = [
     {
       name: "your-fav-img",
-      thumbnail: "/images/Projects/yfiThumbnail.png",
-      date: "07/2024",
-      type: "bachelor thesis",
+      thumbnail: "/images/Projects/yfiThumbnail3.jpg",
+      date: "02/2023",
+      type: "personal project",
       textColor: "text-text-primary",
       index: 0,
-      slug: "zebra",
+      slug: "your-fav-img",
       description:
-        "zebra is an innovative tool that simplifies and enhances the creation of audio descriptions for live theater. With synchronized scripts, role-specific views, and accessibility-focused features, it streamlines the workflow for both blind and sighted users. ",
+        "Your Favourite Image was a side project i did to play around with React-Three-Fiber and generating depth maps with AI.",
       teamMembers: ["Fabienne Vatter", "Nyal Hettmer"],
       context:
-        "University / Bachelorthesis at HfG Gmünd / Supervised by: Jens Döring, Fabian Rauch",
+        "Personal / Web-Dev Project / Built with React + React Three Fiber",
       projectLinks: [
-        { title: "Project Website", url: "https://zebra-linktree.vercel.app/" },
+        { title: "Project Website", url: "https://your-fav-img.netlify.app/" },
         {
-          title: "Documentation",
-          url: "https://drive.google.com/file/d/1bIWaY4AjlHBzkndE-c-0E0NXKvLB0P4N/view?usp=sharing",
-        },
-        {
-          title: "UX-Design-Awards",
-          url: "https://ux-design-awards.com/winners/2025-1-zebra",
+          title: "Git Repo",
+          url: "https://github.com/josch-r/your-fav-img",
         },
       ],
     },
     {
-      name: "Eine Stadt wird bunt",
-      thumbnail: "/images/Projects/eswbThumbnail.jpg",
+      name: "Remote Gardening",
+      thumbnail: "/images/Projects/remoteGardeningThumbnail.jpg",
       date: "11/2022",
-      type: "client",
-      textColor: "text-text-primary",
+      type: "University",
+      textColor: "text-text-dark",
       index: 1,
       description:
         "UX & technical development for Eine Stadt wird bunt – an interactive exhibition blending digital media, app design, and installation technology to bring Hamburg's graffiti history to life.",

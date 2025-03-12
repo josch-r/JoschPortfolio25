@@ -29,22 +29,18 @@ import { Project } from "./projectsData";
     {
       name: "Remote Gardening",
       thumbnail: "/images/Projects/remoteGardeningThumbnail.jpg",
-      date: "11/2022",
+      date: "07/2021",
       type: "University",
       textColor: "text-text-dark",
       index: 1,
       description:
-        "UX & technical development for Eine Stadt wird bunt – an interactive exhibition blending digital media, app design, and installation technology to bring Hamburg's graffiti history to life.",
-      slug: "eswb",
-      teamMembers: ["FLUUR"],
-      context: "Client Work / Digital Experience & UX / as Intern at FLUUR",
+        "Remote Gardening: An innovative smart garden system that waters your plants automatically while you're away. Control your garden remotely, monitor plant health, and never worry about neglected plants again. Perfect for travelers and busy plant lovers.",
+      slug: "remote-gardening",
+      teamMembers: ["Jannes Blobel", "Fabienne Vatter"],
+      context: "University / Technical Fundamentals II – 2nd Semester /  Supervised by: Prof. Michael Schuster, Benjamin Thomsen",
       projectLinks: [
-        { title: "Project Website", url: "https://www.fluur.de/" },
-        { title: "Exhibition", url: "https://www.shmh.de/ausstellungen/eswb/" },
-        {
-          title: "ADAC Tourism Award",
-          url: "https://presse.adac.de/regionalclubs/hansa/adac-tourismuspreis.html",
-        },
+        { title: "Online Exhibition", url: "https://ausstellung.hfg-gmuend.de/s-2121/projekte/remote-gardening" },
+        { title: "Git Repo", url: "https://github.com/josch-r/RemoteGardeningTG2" }
       ],
     },
   ]

@@ -96,8 +96,16 @@ export default function ProjectPage() {
               development and React. I learned a lot about the possibilities of
               r3f and how to integrate it into my project, plus I had so much
               fun playing around with parameters and different images (shoutouts
-              to <a className="text-text-tertiary underline" target="_blank" href="https://lunakloess.de/">Luna Kloess</a>, who let me tinker around with some of her portrait
-              work).<br/> All in all a great learning experience that really helped
+              to{" "}
+              <a
+                className="text-text-tertiary underline"
+                target="_blank"
+                href="https://lunakloess.de/"
+              >
+                Luna Kloess
+              </a>
+              , who let me tinker around with some of her portrait work).
+              <br /> All in all a great learning experience that really helped
               me grow my skills.
             </p>
 
@@ -107,7 +115,7 @@ export default function ProjectPage() {
               classprops="mt-5"
             />
           </section>
-          
+
           <Link
             className="flex justify-end md:col-start-3 md:col-span-8 my-2"
             href={

@@ -1,56 +1,62 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState } from "react"
-import Image from "next/image"
-import { X } from "lucide-react"
-import styles from "./gallery.module.css"
+import type React from "react";
+import { useState } from "react";
+import Image from "next/image";
+import { X } from "lucide-react";
+import styles from "./gallery.module.css";
 
 interface Image {
-  src: string
-  caption: string
-  id: number
+  src: string;
+  caption: string;
+  id: number;
 }
 
 interface GalleryProps {
-  images: Image[]
+  images: Image[];
 }
 
 export default function Gallery({ images }: GalleryProps) {
-  const [expandedImage, setExpandedImage] = useState<Image | null>(null)
+  const [expandedImage, setExpandedImage] = useState<Image | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Split images into two arrays for left and right columns
-  const leftColumnImages = images.filter((_, i) => i % 2 === 0)
-  const rightColumnImages = images.filter((_, i) => i % 2 !== 0)
+  const leftColumnImages = images.filter((_, i) => i % 2 === 0);
+  const rightColumnImages = images.filter((_, i) => i % 2 !== 0);
 
   const handleImageClick = (image: Image) => {
-    setExpandedImage(image)
-  }
+    setIsLoading(true);
+    setExpandedImage(image);
+  };
 
   const handleCloseExpanded = () => {
-    setExpandedImage(null)
-  }
+    setExpandedImage(null);
+  };
 
   // Close expanded image when clicking outside of it
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
-      handleCloseExpanded()
+      handleCloseExpanded();
     }
-  }
+  };
 
   // Handle escape key press to close expanded image
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Escape") {
-      handleCloseExpanded()
+      handleCloseExpanded();
     }
-  }
+  };
 
   return (
     <section className="md:col-start-3 md:col-span-8 mt-8">
       <div className={styles.gallery}>
         <div className={styles.column}>
           {leftColumnImages.map((img) => (
-            <div key={img.id} className={styles.galleryItem} onClick={() => handleImageClick(img)}>
+            <div
+              key={img.id}
+              className={styles.galleryItem}
+              onClick={() => handleImageClick(img)}
+            >
               <Image
                 src={img.src || "/placeholder.svg"}
                 alt={img.caption}
@@ -65,7 +71,11 @@ export default function Gallery({ images }: GalleryProps) {
         </div>
         <div className={styles.column}>
           {rightColumnImages.map((img) => (
-            <div key={img.id} className={styles.galleryItem} onClick={() => handleImageClick(img)}>
+            <div
+              key={img.id}
+              className={styles.galleryItem}
+              onClick={() => handleImageClick(img)}
+            >
               <Image
                 src={img.src || "/placeholder.svg"}
                 alt={img.caption}
@@ -92,7 +102,11 @@ export default function Gallery({ images }: GalleryProps) {
           aria-label="Close expanded image"
         >
           <div className={styles.expandedImageContainer}>
-            <button className={styles.closeButton} onClick={handleCloseExpanded} aria-label="Close expanded image">
+            <button
+              className={styles.closeButton}
+              onClick={handleCloseExpanded}
+              aria-label="Close expanded image"
+            >
               <X size={24} />
             </button>
             <Image
@@ -100,7 +114,8 @@ export default function Gallery({ images }: GalleryProps) {
               alt={expandedImage.caption}
               width={1200}
               height={800}
-              className={styles.expandedImage}
+              onLoadingComplete={() => setIsLoading(false)}      
+              className={styles.expandedImage + (isLoading ? " opacity-0" : "")}
               sizes="90vw"
             />
             <p className={styles.expandedCaption}>{expandedImage.caption}</p>
@@ -108,6 +123,5 @@ export default function Gallery({ images }: GalleryProps) {
         </div>
       )}
     </section>
-  )
+  );
 }
-

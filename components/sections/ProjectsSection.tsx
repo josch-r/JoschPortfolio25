@@ -7,6 +7,7 @@ export default function ProjectSection() {
   const projects = [
     {
       name: "zebra",
+      slug: "zebra",
       thumbnail: "/images/SelectedWork/zebraThumbnail.jpg",
       date: "07/2024",
       type: "bachelor thesis",
@@ -14,7 +15,8 @@ export default function ProjectSection() {
       index: 0,
     },
     {
-      name: "ESWB",
+      name: "Eine Stadt wird bunt",
+      slug: "eswb",
       thumbnail: "/images/SelectedWork/eswbThumbnail.jpg",
       date: "02/2023",
       type: "client",
@@ -28,14 +30,14 @@ export default function ProjectSection() {
         <h2 className="col-span-1 md:col-span-12 text-heading-medium !font-normal md:ms-8 mt-16" id="projects-heading">
           Selected Work
         </h2>
-        {projects.map(({ name, thumbnail, date, type, textColor, index }) => (
+        {projects.map(({ name, slug, thumbnail, date, type, textColor, index }) => (
           <div
             key={index}
             className={`col-span-1 md:col-span-12 lg:col-span-6 md:px-8 lg:px-0 ${
               index > 0 ? "lg:pr-8" : "lg:pl-8"
             }`}
           >
-            <Link href={`/projects/${name.toLowerCase()}`}>
+            <Link href={`/projects/${slug.toLowerCase()}`}>
               <div className="relative w-full aspect-video cursor-pointer">
                 <Image
                   src={thumbnail}

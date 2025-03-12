@@ -11,7 +11,7 @@ import { Project } from "./projectsData";
       slug: "your-fav-img",
       description:
         "Your Favourite Image was a side project i did to play around with React-Three-Fiber and generating depth maps with AI.",
-      teamMembers: ["Fabienne Vatter", "Nyal Hettmer"],
+      teamMembers: [""],
       context:
         "Personal / Web-Dev Project / Built with React + React Three Fiber",
       projectLinks: [
@@ -20,6 +20,10 @@ import { Project } from "./projectsData";
           title: "Git Repo",
           url: "https://github.com/josch-r/your-fav-img",
         },
+        {
+          title: "AI Model",
+          url: "https://huggingface.co/spaces/LiheYoung/Depth-Anything"
+        }
       ],
     },
     {

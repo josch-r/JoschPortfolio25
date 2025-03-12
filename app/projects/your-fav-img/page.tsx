@@ -1,6 +1,6 @@
 // app/projects/[project]/page.tsx
 import { notFound } from "next/navigation";
-import { archivedProjects } from "@/lib/archivedProjectsData"; 
+import { archivedProjects } from "@/lib/archivedProjectsData";
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import ImageWithCaption from "@/components/ui/imgWithCaption";
 import { GridLayout } from "@/components/layout/GridLayout";
@@ -74,92 +74,40 @@ export default function ProjectPage() {
           <section className="col-span-1 md:col-span-8 md:col-start-3 mt-8">
             <h3 className="text-heading-medium">Description</h3>
             <p className="text-body mt-2">
-              <span className="text-productname">Your Favourite Image</span> is
-              a personal Project
+              <span className="text-productname">your-fav-img</span> is a
+              personal Project exploring the possibilities of r3f, AI depth map
+              generation with the goal to revitalize existing Paintings and
+              Images. It was built with React, React Three Fiber and
+              framer-motion and uses a pre-trained AI model to generate depth
+              maps from images. It was part of my learning journey to get more
+              familiar with 3D in the browser and React.
             </p>
             <ImageWithCaption
-              src="/images/Projects/yfi/yfiHeader.jpeg"
+              src="/images/Projects/yfi/yfiWalkthough.gif"
               caption="Your Favourite Website"
               classprops="mt-5"
             />
           </section>
 
           <section className="mt-16 col-span-1 md:col-span-8 md:col-start-3 text-body">
-            <h3 className="text-heading-medium">Technical Implementation</h3>
+            <h3 className="text-heading-medium">Take-Aways</h3>
             <p className="text-body mt-2">
-              Our solution integrates three key components into a seamless
-              warning system. The smart road markers form the foundation,
-              equipped with infrared cameras, motion detection, and LED warning
-              lights, all powered by solar energy in a custom-designed modular
-              housing. These connect to our interactive traffic sign system,
-              which displays varying danger levels from &quot;Low Risk&quot; to
-              &quot;Acute Danger.&quot; The third component is our mobile
-              application, providing real-time warnings and route analysis while
-              maintaining a dark mode interface for safe driving.
+              The project was a great starting point to get into web-3D
+              development and React. I learned a lot about the possibilities of
+              r3f and how to integrate it into my project, plus I had so much
+              fun playing around with parameters and different images (shoutouts
+              to <a className="text-text-tertiary underline" target="_blank" href="https://lunakloess.de/">Luna Kloess</a>, who let me tinker around with some of her portrait
+              work).<br/> All in all a great learning experience that really helped
+              me grow my skills.
             </p>
 
             <ImageWithCaption
-              src="/images/Projects/wiwa/wiwaPfosten.jpg"
-              caption="A picture of our Prototype, which we tested on a local roadside."
+              src="/images/Projects/yfi/yfiHeader.jpeg"
+              caption="Header Image of your-fav-img. Picture by Luna Kloess"
               classprops="mt-5"
             />
           </section>
-          <section className="mt-16 col-span-1 md:col-span-8 md:col-start-3 grid grid-cols-10 gap-x-5">
-            <h3 className="text-heading-medium col-span-10">
-              Technical Architecture
-            </h3>
-            <div className="col-span-10 lg:col-span-5 mt-2">
-              <p className="text-body ">
-                The system uses OpenCV and background subtraction for reliable
-                wildlife detection. When movement is detected, the camera
-                captures an image which is compared to a reference frame.
-                Confirmed wildlife presence triggers a cascade of warnings:
-                local LED indicators activate, nearby traffic signs update their
-                status, and mobile app alerts are dispatched to approaching
-                drivers.
-              </p>
-            </div>
-            <ImageWithCaption
-              src="/images/Projects/wiwa/wiwaCam.jpg"
-              caption="Image captured with one of our cams."
-              classprops="col-span-10 lg:col-span-5 mt-5 lg:mt-0"
-            />
-          </section>
-
-          <section className="mt-16 col-span-1 md:col-span-8 md:col-start-3 text-body">
-            <h3 className="text-heading-medium">Design Process</h3>
-            <p className="text-body mt-2">
-              The development evolved through several critical iterations,
-              starting with a basic light barrier system before advancing to our
-              current infrared camera solution. A key challenge was optimizing
-              power consumption for solar operation, which led to significant
-              refinements in our detection algorithms. The modular housing
-              design underwent multiple iterations to ensure easy installation
-              and maintenance while remaining compatible with existing road
-              infrastructure.
-            </p>
-          </section>
-
-          <section className="mt-16 col-span-1 md:col-span-8 md:col-start-3 text-body">
-            <h3 className="text-heading-medium">Innovation</h3>
-            <p className="text-body mt-2">
-              Unlike traditional wildlife warning systems that rely on
-              reflectors or acoustic signals which animals quickly adapt to,{" "}
-              <span className="text-productname">WiWa</span> focuses on warning
-              drivers through multiple channels. The system provides both
-              immediate local warnings and predictive information through the
-              mobile app, creating a comprehensive safety solution. The modular
-              design allows for easy installation and maintenance, while solar
-              power ensures autonomous operation. By combining physical
-              infrastructure with digital technology, WiWa creates a sustainable
-              and effective solution to wildlife-vehicle collisions.
-            </p>
-            <ImageWithCaption
-              src="/images/Projects/wiwa/wiwaFamily.jpg"
-              caption="The WiWa product lineup."
-              classprops="col-span-1 md:col-span-8 md:col-start-3 mt-5"
-            />
-          </section>
+          
           <Link
             className="flex justify-end md:col-start-3 md:col-span-8 my-2"
             href={

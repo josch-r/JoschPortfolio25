@@ -220,7 +220,7 @@ export default function ProjectPage() {
               </p>
               <ImageWithCaption
                 src="/images/Projects/zebra/zebraFeatureDiagram.png"
-                caption="The collaboration view of zebra"
+                caption="How zebra supports the audiodescription process"
                 classprops="mt-8"
               />
             </div>

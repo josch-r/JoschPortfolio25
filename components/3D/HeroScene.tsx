@@ -64,39 +64,42 @@ const Agent = React.memo(({ radius }: { radius: number }) => {
 
 // Add this hook to your component
 const useResponsiveKnobGroup = () => {
-  const [position, setPosition] = useState<[number, number, number]>([12, -6, -7]);
-  const [rotation, setRotation] = useState<[number, number, number]>([-0.2, -0.6, 0]);
-  
+  const [position, setPosition] = useState<[number, number, number]>([
+    12, -6, -7,
+  ]);
+  const [rotation, setRotation] = useState<[number, number, number]>([
+    -0.2, -0.6, 0,
+  ]);
+
   useEffect(() => {
     const handleResize = () => {
       // Mobile (< 768px)
       if (window.innerWidth < 768) {
         setPosition([0, -8, -8] as [number, number, number]);
         setRotation([0, 0, 0] as [number, number, number]);
-      } 
+      }
       // Tablet (768px - 1024px)
       else if (window.innerWidth < 1280) {
         setPosition([0, -7, -6] as [number, number, number]);
         setRotation([0, 0, 0] as [number, number, number]);
-      } 
+      }
       // Desktop
       else {
         setPosition([12, -6, -7] as [number, number, number]);
         setRotation([-0.2, -0.6, 0] as [number, number, number]);
       }
     };
-    
+
     // Set initial position
     handleResize();
-    
-    // Update on resize
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-  
-  return {position, rotation};
-};
 
+    // Update on resize
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return { position, rotation };
+};
 
 // Add displayName for better debugging
 Agent.displayName = "Agent";
@@ -105,9 +108,23 @@ export function HeroScene() {
   const radius = 5;
   const [stepSize, setStepSize] = useState(0.03);
   const [noiseScale, setNoiseScale] = useState(0.1);
+  const [showValues, setShowValues] = useState<boolean>(false);
   const [randomness, setRandomness] = useState(0.02);
 
   const [particleCount, setParticleCount] = useState(20000);
+
+  // Add these handler functions before the return statement
+  const handleStepSizeChange = (value: number) => {
+    setStepSize(value);
+    setShowValues(true);
+    setTimeout(() => setShowValues(false), 2000);
+  };
+
+  const handleNoiseScaleChange = (value: number) => {
+    setNoiseScale(value);
+    setShowValues(true);
+    setTimeout(() => setShowValues(false), 2000);
+  };
 
   useEffect(() => {
     // Simple device detection
@@ -130,7 +147,8 @@ export function HeroScene() {
   }, []);
 
   // Get responsive position and rotation for knob group
-  const { position: knobGroupPosition, rotation: knobGroupRotation } = useResponsiveKnobGroup();
+  const { position: knobGroupPosition, rotation: knobGroupRotation } =
+    useResponsiveKnobGroup();
 
   return (
     <div className="absolute w-full h-[100vh]">
@@ -208,7 +226,26 @@ export function HeroScene() {
             />
           </group>
 
-          <JoschHead />
+          <JoschHead
+            onStepSizeChange={handleStepSizeChange}
+            onNoiseScaleChange={handleNoiseScaleChange}
+            initialStepSize={stepSize}
+            initialNoiseScale={noiseScale}
+          />
+          {/* Display current values when changing */}
+          {showValues && (
+            <Text
+              position={[0, -3, -5]}
+              color="white"
+              fontSize={0.5}
+              anchorX="center"
+              anchorY="middle"
+            >
+              {`Step Size: ${stepSize.toFixed(
+                3
+              )} | Noise Scale: ${noiseScale.toFixed(3)}`}
+            </Text>
+          )}
           {/* <OrbitControls enableZoom={false} /> */}
           {/* <Perf
             position="bottom-left"

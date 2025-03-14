@@ -30,7 +30,7 @@ export default function ProjectsPage() {
                 alt={`Thumbnail of the ${name} project`}
                 fill
                 sizes="100%"
-                className="rounded-md object-cover"
+                className="rounded-md object-cover saturate-0 hover:saturate-100 transition-all ease-in duration-300"
               />
               <div className="absolute bottom-0 left-0 ps-5 md:ps-8 pb-3 md:pb-5">
                 <h4 className={`text-hero !${textColor}`}>{name}</h4>
@@ -60,7 +60,7 @@ export default function ProjectsPage() {
                 alt={`Thumbnail of the ${name} project`}
                 fill
                 sizes="100%"
-                className="rounded-md object-cover"
+                className="rounded-md object-cover saturate-0 hover:saturate-100 transition-all ease-in duration-300"
               />
               <div className="absolute bottom-0 left-0 ps-5 md:ps-8 pb-3 md:pb-5">
                 <h4 className={`text-hero !${textColor}`}>{name}</h4>

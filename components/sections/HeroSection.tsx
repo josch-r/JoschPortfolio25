@@ -32,12 +32,18 @@ export function HeroSection() {
           </h1>
 
           <motion.button
+            initial={{ opacity: 0, y: 75 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.4,
+              ease: "easeOut",
+            }}
             onClick={scrollToWork}
             aria-label="Take a look at what I do"
-            className="inline-flex items-center text-link hover:text-primary/90 transition-colors no-underline mb-12 cursor-pointer pointer-events-auto"
+            className="group inline-flex items-center text-link hover:text-primary/90 transition-colors no-underline mb-12 cursor-pointer pointer-events-auto"
           >
             <span className="mr-1">Take a look at what I do</span>
-            <ArrowDownRight aria-hidden="true" className="text-primary" />
+            <ArrowDownRight aria-hidden="true" className="text-primary group-hover:rotate-45 transition-all ease-in duration-200" />
           </motion.button>
         </section>
       </GridLayout>

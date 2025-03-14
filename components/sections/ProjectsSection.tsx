@@ -27,13 +27,17 @@ export default function ProjectSection() {
 
   return (
     <GridLayout aria-labelledby="projects-heading">
-        <h2 className="col-span-1 md:col-span-12 text-heading-medium !font-normal md:ms-8 mt-16" id="projects-heading">
-          Selected Work
-        </h2>
-        {projects.map(({ name, slug, thumbnail, date, type, textColor, index }) => (
+      <h2
+        className="col-span-1 md:col-span-12 text-heading-medium !font-normal md:ms-8 mt-16"
+        id="projects-heading"
+      >
+        Selected Work
+      </h2>
+      {projects.map(
+        ({ name, slug, thumbnail, date, type, textColor, index }) => (
           <div
             key={index}
-            className={`col-span-1 md:col-span-12 lg:col-span-6 md:px-8 lg:px-0 ${
+            className={`col-span-1 md:col-span-12 lg:col-span-6 md:px-8 lg:px-0   ${
               index > 0 ? "lg:pr-8" : "lg:pl-8"
             }`}
           >
@@ -41,9 +45,9 @@ export default function ProjectSection() {
               <div className="relative w-full aspect-video cursor-pointer">
                 <Image
                   src={thumbnail}
-                  alt={`${name} project thumbnail - ${type}`} 
+                  alt={`${name} project thumbnail - ${type}`}
                   fill
-                  className="rounded-md object-contain"
+                  className="rounded-md saturate-0 object-contain hover:saturate-100 transition-all ease-in duration-300"
                 />
                 <div className="absolute bottom-0 left-0 ps-8 pb-5">
                   <h3 className={`text-hero !${textColor}`}>{name}</h3>
@@ -54,14 +58,45 @@ export default function ProjectSection() {
               </div>
             </Link>
           </div>
-        ))}
-        <div className="flex justify-end pt-auto col-span-1 md:col-span-12 md:me-8">
-          <Link href="/projects" aria-label="View all projects">
-            <Button variant="default" className="cursor-pointer">
-              View all projects
-            </Button>
-          </Link>
-        </div>
+        )
+      )}
+      <div className="flex justify-end pt-auto col-span-1 md:col-span-12 md:me-8">
+        <Link href="/projects" aria-label="View all projects">
+          <Button variant="default" className="cursor-pointer">
+            View all projects
+          </Button>
+        </Link>
+      </div>
     </GridLayout>
   );
+}
+
+{
+
+  /*
+  //hover anim with scale & blur
+  
+  <div
+              key={index}
+              className={`col-span-1 md:col-span-12 lg:col-span-6 md:px-8 lg:px-0   ${
+                index > 0 ? "lg:pr-8" : "lg:pl-8"
+              }`}
+            >
+              <Link href={`/projects/${slug.toLowerCase()}`}>
+                <div className="group relative w-full aspect-video cursor-pointer transition-all duration-300 ease-in-out hover:scale-[102%] hover:shadow-md">
+                  <Image
+                    src={thumbnail}
+                    alt={`${name} project thumbnail - ${type}`} 
+                    fill
+                    className="rounded-md object-contain group-hover:blur-[2px] transition-all duration-300"
+                  />
+                  <div className="absolute bottom-0 left-0 ps-8 pb-5">
+                    <h3 className={`text-hero !${textColor}`}>{name}</h3>
+                    <h4 className={`text-body-small !${textColor}`}>
+                      {type} | {date}
+                    </h4>
+                  </div>
+                </div>
+              </Link>
+            </div> */
 }

@@ -1,6 +1,5 @@
 "use client";
 
-
 import { Environment } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import React, { Suspense, useEffect, useRef, useState } from "react";
@@ -9,6 +8,9 @@ import dynamic from "next/dynamic";
 import { JoschHead } from "./JoschHead";
 import { createNoise3D } from "simplex-noise";
 import * as THREE from "three";
+import { motion } from "framer-motion";
+import { useProgress } from "@react-three/drei";
+import { Html } from "@react-three/drei";
 
 const NoisePoints = dynamic(() => import("./NoisePoints"), { ssr: false });
 
@@ -151,7 +153,6 @@ export function HeroScene() {
 
   // const { position: knobGroupPosition, rotation: knobGroupRotation } =
   //   useResponsiveKnobGroup();
-
 
   return (
     <motion.div

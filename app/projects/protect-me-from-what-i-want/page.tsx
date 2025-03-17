@@ -9,6 +9,7 @@ import { Metadata } from "next";
 import BlockQuote from "@/components/ui/blockQuote";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 const slug = "protect-me-from-what-i-want";
 
@@ -71,6 +72,7 @@ export default function ProjectPage() {
 
   return (
     <>
+    <ScrollProgress />
       <ProjectLayout project={projectData}>
         <GridLayout>
           <section className="col-span-1 md:col-span-8 md:col-start-3 mt-8">

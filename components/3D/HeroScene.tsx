@@ -1,5 +1,6 @@
 "use client";
 
+
 import { Environment } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import React, { Suspense, useEffect, useRef, useState } from "react";
@@ -62,6 +63,7 @@ const Agent = React.memo(({ radius }: { radius: number }) => {
 });
 
 // Add this hook to your component
+
 // const useResponsiveKnobGroup = () => {
 //   const [position, setPosition] = useState<[number, number, number]>([
 //     12, -6, -7,
@@ -146,13 +148,21 @@ export function HeroScene() {
   }, []);
 
   // Get responsive position and rotation for knob group
+
   // const { position: knobGroupPosition, rotation: knobGroupRotation } =
   //   useResponsiveKnobGroup();
 
+
   return (
-    <div className="absolute w-full h-[100vh]">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1.75 }}
+      className="absolute w-full h-[100vh]"
+    >
       <Canvas camera={{ position: [0, -1, 10], fov: 60 }}>
-        <Suspense fallback={null}>
+        <Suspense fallback={<Loader />}>
           <Environment
             preset="night"
             background={false}
@@ -261,6 +271,11 @@ export function HeroScene() {
           /> */}
         </Suspense>
       </Canvas>
-    </div>
+    </motion.div>
   );
+}
+
+function Loader() {
+  const { progress } = useProgress();
+  return <Html center>{Math.round(progress)}%</Html>;
 }

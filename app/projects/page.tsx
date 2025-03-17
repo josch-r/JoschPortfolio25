@@ -7,6 +7,7 @@ import { projects } from "@/lib/projectsData";
 import { archivedProjects } from "@/lib/archivedProjectsData";
 import type { Metadata } from 'next'
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 export const metadata: Metadata = {
   title: "Projects | Josch",
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <GridLayout>
+      <ScrollProgress />
       <section className="col-span-12 mt-20 grid grid-cols-1 lg:grid-cols-2 gap-5">
       {projects.map(
         ({ name, thumbnail, date, type, textColor, index, slug }) => (
@@ -30,7 +32,7 @@ export default function ProjectsPage() {
                 alt={`Thumbnail of the ${name} project`}
                 fill
                 sizes="100%"
-                className="rounded-md object-cover"
+                className="rounded-md object-cover saturate-0 hover:saturate-100 transition-all ease-in duration-300"
               />
               <div className="absolute bottom-0 left-0 ps-5 md:ps-8 pb-3 md:pb-5">
                 <h4 className={`text-hero !${textColor}`}>{name}</h4>
@@ -60,7 +62,7 @@ export default function ProjectsPage() {
                 alt={`Thumbnail of the ${name} project`}
                 fill
                 sizes="100%"
-                className="rounded-md object-cover"
+                className="rounded-md object-cover saturate-0 hover:saturate-100 transition-all ease-in duration-300"
               />
               <div className="absolute bottom-0 left-0 ps-5 md:ps-8 pb-3 md:pb-5">
                 <h4 className={`text-hero !${textColor}`}>{name}</h4>

@@ -1,6 +1,7 @@
 import { GridLayout } from "@/components/layout/GridLayout";
 import Gallery from "@/components/sections/Gallery";
 import ImageWithCaption from "@/components/ui/imgWithCaption";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { Metadata } from "next";
 import Image from "next/image";
 
@@ -99,6 +100,7 @@ const images: Image[] = [
 export default function About() {
   return (
     <GridLayout>
+      <ScrollProgress />
       <section className="col-span-1 md:col-start-3 md:col-span-4 mt-20" aria-labelledby="about-heading">
         <h1 className="text-heading-large" id="about-heading">About me</h1>
         <p className="text-body mt-8">

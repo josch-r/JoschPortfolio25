@@ -119,11 +119,11 @@ function ShortVita() {
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-body-small !text-text-secondary underline inline-flex items-center gap-1 hover:text-primary/80 transition"
+                className="group text-body-small !text-text-secondary underline inline-flex items-center gap-1 hover:text-primary/80 transition"
                 aria-label={`Visit ${company} website`}
               >
                 {company}
-                <ArrowUpRight size={16} aria-hidden="true" />
+                <ArrowUpRight size={16} aria-hidden="true" className="group-hover:rotate-45 transition-transform ease-out duration-200" />
               </a>
               <p className="text-body-small !text-text-tertiary">{location}</p>
             </div>
@@ -167,11 +167,11 @@ function Education() {
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-body-small !text-text-secondary underline inline-flex items-center gap-1 hover:text-primary/80 transition"
+                className="group text-body-small !text-text-secondary underline inline-flex items-center gap-1 hover:text-primary/80 transition"
                 aria-label={`Visit ${company} website`}
               >
                 {company}
-                <ArrowUpRight size={16} aria-hidden="true" />
+                <ArrowUpRight size={16} aria-hidden="true" className="group-hover:rotate-45 transition-transform ease-out duration-200"/>
               </a>
               <p className="text-body-small !text-text-tertiary">{location}</p>
             </div>

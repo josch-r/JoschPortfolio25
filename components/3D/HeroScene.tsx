@@ -1,6 +1,6 @@
 "use client";
 
-import { Environment, Text } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 // import { Perf, setCustomData } from "r3f-perf";
@@ -8,7 +8,6 @@ import dynamic from "next/dynamic";
 import { JoschHead } from "./JoschHead";
 import { createNoise3D } from "simplex-noise";
 import * as THREE from "three";
-import { Knob3D } from "./Knob3D";
 
 const NoisePoints = dynamic(() => import("./NoisePoints"), { ssr: false });
 
@@ -63,43 +62,43 @@ const Agent = React.memo(({ radius }: { radius: number }) => {
 });
 
 // Add this hook to your component
-const useResponsiveKnobGroup = () => {
-  const [position, setPosition] = useState<[number, number, number]>([
-    12, -6, -7,
-  ]);
-  const [rotation, setRotation] = useState<[number, number, number]>([
-    -0.2, -0.6, 0,
-  ]);
+// const useResponsiveKnobGroup = () => {
+//   const [position, setPosition] = useState<[number, number, number]>([
+//     12, -6, -7,
+//   ]);
+//   const [rotation, setRotation] = useState<[number, number, number]>([
+//     -0.2, -0.6, 0,
+//   ]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      // Mobile (< 768px)
-      if (window.innerWidth < 768) {
-        setPosition([0, -8, -8] as [number, number, number]);
-        setRotation([0, 0, 0] as [number, number, number]);
-      }
-      // Tablet (768px - 1024px)
-      else if (window.innerWidth < 1280) {
-        setPosition([0, -7, -6] as [number, number, number]);
-        setRotation([0, 0, 0] as [number, number, number]);
-      }
-      // Desktop
-      else {
-        setPosition([12, -6, -7] as [number, number, number]);
-        setRotation([-0.2, -0.6, 0] as [number, number, number]);
-      }
-    };
+//   useEffect(() => {
+//     const handleResize = () => {
+//       // Mobile (< 768px)
+//       if (window.innerWidth < 768) {
+//         setPosition([0, -8, -8] as [number, number, number]);
+//         setRotation([0, 0, 0] as [number, number, number]);
+//       }
+//       // Tablet (768px - 1024px)
+//       else if (window.innerWidth < 1280) {
+//         setPosition([0, -7, -6] as [number, number, number]);
+//         setRotation([0, 0, 0] as [number, number, number]);
+//       }
+//       // Desktop
+//       else {
+//         setPosition([12, -6, -7] as [number, number, number]);
+//         setRotation([-0.2, -0.6, 0] as [number, number, number]);
+//       }
+//     };
 
-    // Set initial position
-    handleResize();
+//     // Set initial position
+//     handleResize();
 
-    // Update on resize
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+//     // Update on resize
+//     window.addEventListener("resize", handleResize);
+//     return () => window.removeEventListener("resize", handleResize);
+//   }, []);
 
-  return { position, rotation };
-};
+//   return { position, rotation };
+// };
 
 // Add displayName for better debugging
 Agent.displayName = "Agent";
@@ -108,22 +107,22 @@ export function HeroScene() {
   const radius = 5;
   const [stepSize, setStepSize] = useState(0.03);
   const [noiseScale, setNoiseScale] = useState(0.1);
-  const [showValues, setShowValues] = useState<boolean>(false);
-  const [randomness, setRandomness] = useState(0.02);
+  // const [showValues, setShowValues] = useState<boolean>(false);
+  // const [randomness, setRandomness] = useState(0.02);
 
   const [particleCount, setParticleCount] = useState(20000);
 
   // Add these handler functions before the return statement
   const handleStepSizeChange = (value: number) => {
     setStepSize(value);
-    setShowValues(true);
-    setTimeout(() => setShowValues(false), 2000);
+    // setShowValues(true);
+    // setTimeout(() => setShowValues(false), 2000);
   };
 
   const handleNoiseScaleChange = (value: number) => {
     setNoiseScale(value);
-    setShowValues(true);
-    setTimeout(() => setShowValues(false), 2000);
+    // setShowValues(true);
+    // setTimeout(() => setShowValues(false), 2000);
   };
 
   useEffect(() => {
@@ -147,8 +146,8 @@ export function HeroScene() {
   }, []);
 
   // Get responsive position and rotation for knob group
-  const { position: knobGroupPosition, rotation: knobGroupRotation } =
-    useResponsiveKnobGroup();
+  // const { position: knobGroupPosition, rotation: knobGroupRotation } =
+  //   useResponsiveKnobGroup();
 
   return (
     <div className="absolute w-full h-[100vh]">
@@ -164,13 +163,16 @@ export function HeroScene() {
             count={particleCount}
             stepSize={stepSize}
             noiseScale={noiseScale}
-            randomness={randomness}
+            randomness={0.02}
           />
           {Array.from({ length: 30 }).map((_, i) => (
             <Agent key={i} radius={radius} />
           ))}
 
           {/* 3D Knobs */}
+          {/* 
+
+            OLD KNOBS
           <group position={knobGroupPosition} rotation={knobGroupRotation}>
             <pointLight
               position={[0, 0, 2]}
@@ -190,6 +192,7 @@ export function HeroScene() {
               distance={5}
               decay={1}
             />
+           
             <Text
               position={[0, -1.1, 0]}
               fontSize={0.2}
@@ -200,6 +203,7 @@ export function HeroScene() {
             >
               Tweak to shape the flow
             </Text>
+           
             <Knob3D
               position={[-1.5, 0, 0]}
               name="Step Size"
@@ -223,17 +227,17 @@ export function HeroScene() {
               min={0}
               max={0.4}
               onChange={setRandomness}
-            />
+            /> 
           </group>
-
+*/}
           <JoschHead
             onStepSizeChange={handleStepSizeChange}
             onNoiseScaleChange={handleNoiseScaleChange}
             initialStepSize={stepSize}
             initialNoiseScale={noiseScale}
           />
-          {/* Display current values when changing */}
-          {showValues && (
+          {/* Display current values when changing (for debugging) */}
+          {/* {showValues && (
             <Text
               position={[0, -3, -5]}
               color="white"
@@ -245,8 +249,7 @@ export function HeroScene() {
                 3
               )} | Noise Scale: ${noiseScale.toFixed(3)}`}
             </Text>
-          )}
-          {/* <OrbitControls enableZoom={false} /> */}
+          )} */}
           {/* <Perf
             position="bottom-left"
             customData={{

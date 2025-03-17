@@ -7,7 +7,7 @@ import * as THREE from "three";
 const HEAD_CONTROL = {
   maxRotationX: 0.2, // Maximum X rotation (controls Step Size)
   maxRotationY: 0.8, // Maximum Y rotation (controls Noise Scale)
-  smoothing: 0.05,    // Smoothing factor (lower = smoother but slower)
+  smoothing: 0.1,    // Smoothing factor (lower = smoother but slower)
 };
 
 interface JoschHeadProps {

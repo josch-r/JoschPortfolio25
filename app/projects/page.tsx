@@ -7,6 +7,7 @@ import { projects } from "@/lib/projectsData";
 import { archivedProjects } from "@/lib/archivedProjectsData";
 import type { Metadata } from 'next'
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 export const metadata: Metadata = {
   title: "Projects | Josch",
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <GridLayout>
+      <ScrollProgress />
       <section className="col-span-12 mt-20 grid grid-cols-1 lg:grid-cols-2 gap-5">
       {projects.map(
         ({ name, thumbnail, date, type, textColor, index, slug }) => (

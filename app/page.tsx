@@ -1,6 +1,7 @@
 import { AboutSection } from "@/components/sections/AboutSection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import ProjectSection from "@/components/sections/ProjectsSection";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -67,7 +68,8 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="scroll-smooth">
+    <div className="!scroll-smooth">
+      <ScrollProgress />
       <HeroSection />
       <AboutSection />
       <ProjectSection />

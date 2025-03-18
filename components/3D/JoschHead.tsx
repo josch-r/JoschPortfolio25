@@ -168,7 +168,7 @@ export const JoschHead = ({
     <group ref={groupRef} dispose={null} rotation={baseRotation} scale={0.013}  >
       <Suspense fallback={<Model url="/models/josch2k.glb" />}>
         <Brille />
-        <Model url="/models/josch50k3.glb" onPointerDown={handlePointerDown} />
+        <Model url="/models/josch50k4.glb" onPointerDown={handlePointerDown} />
       </Suspense>
     </group>
   );
@@ -194,23 +194,17 @@ function Model({ url, onPointerDown }: ModelProps) {
 
 type GLTFResult = GLTF & {
   nodes: {
-    BügelL: THREE.Mesh;
-    defaultMaterial001: THREE.Mesh;
-    defaultMaterial007: THREE.Mesh;
-    defaultMaterial004: THREE.Mesh;
-    defaultMaterial002: THREE.Mesh;
-  };
+    BrillenGläser: THREE.Mesh
+    Bügel2R: THREE.Mesh
+  }
   materials: {
-    MetalThingy: THREE.MeshStandardMaterial;
-    ["Material.001"]: THREE.MeshStandardMaterial;
-    GLASSES: THREE.MeshStandardMaterial;
-    GlassesFront: THREE.MeshStandardMaterial;
-    Material: THREE.MeshPhysicalMaterial;
-  };
-};
+    Material: THREE.MeshPhysicalMaterial
+    GlassesFront: THREE.MeshStandardMaterial
+  }
+}
 
 const Brille = () => {
-  const { nodes, materials } = useGLTF("/models/brille2.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("/models/brilleSmall2.glb") as GLTFResult;
 
   return (
     <group
@@ -219,46 +213,12 @@ const Brille = () => {
       scale={1000}
       rotation={[-0.79, -0.33, 0.16]}
     >
-      <mesh geometry={nodes.defaultMaterial001.geometry} material={materials['Material.001']} rotation={[-0.043, 0, 0]} scale={0.028} />
-      <mesh geometry={nodes.defaultMaterial004.geometry} material={materials.GlassesFront} rotation={[-0.043, 0, 0]} scale={0.028} />
-      <mesh geometry={nodes.defaultMaterial002.geometry} material={materials.Material} rotation={[-0.043, 0, 0]} scale={0.028} />
-      {/*
-      For high res brille
-      
-      <mesh
-        geometry={nodes.BügelL.geometry}
-        material={materials.MetalThingy}
-        rotation={[-1.682, 0.004, -0.105]}
-        scale={0.028}
-      />
-      <mesh
-        geometry={nodes.defaultMaterial001.geometry}
-        material={materials["Material.001"]}
-        rotation={[-0.043, 0, 0]}
-        scale={0.028}
-      />
-      <mesh
-        geometry={nodes.defaultMaterial007.geometry}
-        material={materials.GLASSES}
-        rotation={[-1.613, 0, 0]}
-        scale={0.028}
-      />
-      <mesh
-        geometry={nodes.defaultMaterial004.geometry}
-        material={materials.GlassesFront}
-        rotation={[-0.043, 0, 0]}
-        scale={0.028}
-      />
-      <mesh
-        geometry={nodes.defaultMaterial002.geometry}
-        material={materials.Material}
-        rotation={[-0.043, 0, 0]}
-        scale={0.028}
-      /> */}
+      <mesh geometry={nodes.BrillenGläser.geometry} material={materials.Material} rotation={[-0.043, 0, 0]} scale={0.028} />
+      <mesh geometry={nodes.Bügel2R.geometry} material={materials.GlassesFront} rotation={[Math.PI, 1.5, 3.099]} scale={0.028} />
     </group>
   );
 };
 
-useGLTF.preload("/models/josch50k3.glb");
-useGLTF.preload("/models/brille2.glb");
+useGLTF.preload("/models/josch50k4.glb");
+useGLTF.preload("/models/brilleSmall2.glb");
 useGLTF.preload("/models/josch2k.glb");

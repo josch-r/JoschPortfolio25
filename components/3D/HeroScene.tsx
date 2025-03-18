@@ -3,7 +3,7 @@
 import { Environment } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import React, { Suspense, useEffect, useRef, useState } from "react";
-// import { Perf, setCustomData } from "r3f-perf";
+import { Perf } from "r3f-perf";
 import dynamic from "next/dynamic";
 import { JoschHead } from "./JoschHead";
 import { createNoise3D } from "simplex-noise";
@@ -135,7 +135,6 @@ export function HeroScene() {
     const isLowPerfDevice = window.navigator.hardwareConcurrency <= 4;
     const cpuCores = window.navigator.hardwareConcurrency || 4;
 
-    // setCustomData(20000);
     // console.log("Device detection:", { isMobile, cpuCores });
 
     if (isMobile || isLowPerfDevice) {
@@ -148,11 +147,6 @@ export function HeroScene() {
     }
     // High-end devices keep the default 20000
   }, []);
-
-  // Get responsive position and rotation for knob group
-
-  // const { position: knobGroupPosition, rotation: knobGroupRotation } =
-  //   useResponsiveKnobGroup();
 
   return (
     <motion.div
@@ -180,88 +174,14 @@ export function HeroScene() {
             <Agent key={i} radius={radius} />
           ))}
 
-          {/* 3D Knobs */}
-          {/* 
-
-            OLD KNOBS
-          <group position={knobGroupPosition} rotation={knobGroupRotation}>
-            <pointLight
-              position={[0, 0, 2]}
-              intensity={0.2}
-              distance={5}
-              decay={1}
-            />
-            <pointLight
-              position={[1.5, 0, 2]}
-              intensity={0.2}
-              distance={5}
-              decay={1}
-            />
-            <pointLight
-              position={[-1.5, 0, 2]}
-              intensity={0.2}
-              distance={5}
-              decay={1}
-            />
-           
-            <Text
-              position={[0, -1.1, 0]}
-              fontSize={0.2}
-              color={"#949494"}
-              anchorX="center"
-              anchorY="middle"
-              font="/fonts/GeistMono-Regular.ttf"
-            >
-              Tweak to shape the flow
-            </Text>
-           
-            <Knob3D
-              position={[-1.5, 0, 0]}
-              name="Step Size"
-              value={stepSize}
-              min={0.001}
-              max={0.2}
-              onChange={setStepSize}
-            />
-            <Knob3D
-              position={[0, 0, 0]}
-              name="Noise Scale"
-              value={noiseScale}
-              min={0.001}
-              max={0.7}
-              onChange={setNoiseScale}
-            />
-            <Knob3D
-              position={[1.5, 0, 0]}
-              name="Randomness"
-              value={randomness}
-              min={0}
-              max={0.4}
-              onChange={setRandomness}
-            /> 
-          </group>
-*/}
+          
           <JoschHead
             onStepSizeChange={handleStepSizeChange}
             onNoiseScaleChange={handleNoiseScaleChange}
             initialStepSize={stepSize}
             initialNoiseScale={noiseScale}
           />
-          {/* Display current values when changing (for debugging) */}
-          {/* {showValues && (
-            <Text
-              position={[0, -3, -5]}
-              color="white"
-              fontSize={0.5}
-              anchorX="center"
-              anchorY="middle"
-            >
-              {`Step Size: ${stepSize.toFixed(
-                3
-              )} | Noise Scale: ${noiseScale.toFixed(3)}`}
-            </Text>
-          )} */}
-          {/* <Perf
+          <Perf
             position="bottom-left"
             customData={{
               value: particleCount,
@@ -269,7 +189,7 @@ export function HeroScene() {
               info: "" as unknown as number,
               round: 0, // No decimal places needed for particle count
             }}
-          /> */}
+          />
         </Suspense>
       </Canvas>
     </motion.div>

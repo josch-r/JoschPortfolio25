@@ -11,7 +11,7 @@ import { Project } from "./projectsData";
       slug: "your-fav-img",
       description:
         "Your Favourite Image was a side project i did to play around with React-Three-Fiber and generating depth maps with AI.",
-      teamMembers: [""],
+      teamMembers: ["Joschua Rothenbacher"],
       context:
         "Personal / Web-Dev Project / Built with React + React Three Fiber",
       projectLinks: [

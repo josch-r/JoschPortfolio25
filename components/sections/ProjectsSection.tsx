@@ -47,7 +47,7 @@ export default function ProjectSection() {
                   src={thumbnail}
                   alt={`${name} project thumbnail - ${type}`}
                   fill
-                  className="rounded-md saturate-0 object-contain hover:saturate-100 transition-all ease-in duration-300"
+                  className="rounded-md md:saturate-0 object-contain hover:saturate-100 transition-all ease-in duration-300"
                 />
                 <div className="absolute bottom-0 left-0 ps-8 pb-5">
                   <h3 className={`text-hero !${textColor}`}>{name}</h3>

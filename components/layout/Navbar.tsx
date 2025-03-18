@@ -58,9 +58,9 @@ export function Navbar() {
         <div className="container mx-auto">
           <ul className="flex items-center justify-center space-x-8">
             {[
-              { href: "/", label: "josch" },
-              { href: "/projects", label: "projects" },
-              { href: "/about", label: "about" },
+              { href: "/", label: "Josch" },
+              { href: "/projects", label: "Projects" },
+              { href: "/about", label: "About" },
             ].map((item) => (
               <li key={item.href}>
                 <Link

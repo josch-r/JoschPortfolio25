@@ -25,7 +25,7 @@ export function HeroSection() {
           className="md:col-span-12 relative flex flex-col items-center text-center h-[90vh] justify-between pt-[20vh] pointer-events-none"
         >
           <h1 className="text-hero xl:max-w-xl" id="hero-heading">
-            I&apos;m <span className="text-primary">josch</span> and I enjoy
+            I&apos;m <span className="text-primary">Josch</span> and I enjoy
             creating things that simultaneously live in the{" "}
             <span className="text-primary">digital</span> and the{" "}
             <span className="text-primary">real world</span>.

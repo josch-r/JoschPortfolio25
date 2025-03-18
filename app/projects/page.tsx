@@ -32,7 +32,7 @@ export default function ProjectsPage() {
                 alt={`Thumbnail of the ${name} project`}
                 fill
                 sizes="100%"
-                className="rounded-md object-cover saturate-0 hover:saturate-100 transition-all ease-in duration-300"
+                className="rounded-md object-cover md:saturate-0 hover:saturate-100 transition-all ease-in duration-300"
               />
               <div className="absolute bottom-0 left-0 ps-5 md:ps-8 pb-3 md:pb-5">
                 <h4 className={`text-hero !${textColor}`}>{name}</h4>
@@ -45,7 +45,7 @@ export default function ProjectsPage() {
         )
       )}
       </section>
-      <Accordion type="single" collapsible className=" col-span-12 mx-8">
+      <Accordion type="single" defaultValue="Archive" collapsible className=" col-span-12 lg:mx-8">
       <AccordionItem value="Archive">
         <AccordionTrigger>Archive</AccordionTrigger>
         <AccordionContent className="grid grid-cols-1 lg:grid-cols-2 gap-5">
@@ -62,7 +62,7 @@ export default function ProjectsPage() {
                 alt={`Thumbnail of the ${name} project`}
                 fill
                 sizes="100%"
-                className="rounded-md object-cover saturate-0 hover:saturate-100 transition-all ease-in duration-300"
+                className="rounded-md object-cover md:saturate-0 hover:saturate-100 transition-all ease-in duration-300"
               />
               <div className="absolute bottom-0 left-0 ps-5 md:ps-8 pb-3 md:pb-5">
                 <h4 className={`text-hero !${textColor}`}>{name}</h4>

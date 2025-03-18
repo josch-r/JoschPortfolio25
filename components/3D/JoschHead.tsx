@@ -16,6 +16,7 @@ interface JoschHeadProps {
   onNoiseScaleChange?: (value: number) => void;
   initialStepSize?: number;
   initialNoiseScale?: number;
+  modelUrl?: string;
 }
 
 export const JoschHead = ({
@@ -23,6 +24,7 @@ export const JoschHead = ({
   onNoiseScaleChange,
   initialStepSize = 0.03,
   initialNoiseScale = 0.1,
+  modelUrl = "/models/josch50k4.glb",
 }: JoschHeadProps = {}) => {
   const groupRef = useRef<THREE.Group>(null);
 
@@ -109,6 +111,10 @@ export const JoschHead = ({
 
     const handleMouseMove = (e: MouseEvent | TouchEvent) => {
       // Get client positions from either mouse or touch event
+      if ("touches" in e && e.cancelable) {
+        e.preventDefault();
+      }
+
       const clientX =
         "touches" in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
       const clientY =
@@ -143,7 +149,7 @@ export const JoschHead = ({
     // Add event listeners
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleEnd);
-    window.addEventListener("touchmove", handleMouseMove);
+    window.addEventListener("touchmove", handleMouseMove, { passive: false });
     window.addEventListener("touchend", handleEnd);
     window.addEventListener("touchcancel", handleEnd);
 
@@ -165,10 +171,10 @@ export const JoschHead = ({
   };
 
   return (
-    <group ref={groupRef} dispose={null} rotation={baseRotation} scale={0.013}  >
+    <group ref={groupRef} dispose={null} rotation={baseRotation} scale={0.013}>
       <Suspense fallback={<Model url="/models/josch2k.glb" />}>
         <Brille />
-        <Model url="/models/josch50k4.glb" onPointerDown={handlePointerDown} />
+        <Model url={modelUrl} onPointerDown={handlePointerDown} />
       </Suspense>
     </group>
   );
@@ -182,7 +188,7 @@ interface ModelProps {
 function Model({ url, onPointerDown }: ModelProps) {
   const { nodes, materials } = useGLTF(url);
   return (
-    <group position={[0,1,0]}>
+    <group position={[0, 1, 0]}>
       <mesh
         geometry={(nodes.josch3 as THREE.Mesh).geometry}
         material={materials["Marble.001"]}
@@ -194,27 +200,39 @@ function Model({ url, onPointerDown }: ModelProps) {
 
 type GLTFResult = GLTF & {
   nodes: {
-    BrillenGläser: THREE.Mesh
-    Bügel2R: THREE.Mesh
-  }
+    BrillenGläser: THREE.Mesh;
+    Bügel2R: THREE.Mesh;
+  };
   materials: {
-    Material: THREE.MeshPhysicalMaterial
-    GlassesFront: THREE.MeshStandardMaterial
-  }
-}
+    Material: THREE.MeshPhysicalMaterial;
+    GlassesFront: THREE.MeshStandardMaterial;
+  };
+};
 
 const Brille = () => {
-  const { nodes, materials } = useGLTF("/models/brilleSmall2.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF(
+    "/models/brilleSmall2.glb"
+  ) as GLTFResult;
 
   return (
     <group
       dispose={null}
-      position={[2,-25.4, 31.8]}
+      position={[2, -25.4, 31.8]}
       scale={1000}
       rotation={[-0.79, -0.33, 0.16]}
     >
-      <mesh geometry={nodes.BrillenGläser.geometry} material={materials.Material} rotation={[-0.043, 0, 0]} scale={0.028} />
-      <mesh geometry={nodes.Bügel2R.geometry} material={materials.GlassesFront} rotation={[Math.PI, 1.5, 3.099]} scale={0.028} />
+      <mesh
+        geometry={nodes.BrillenGläser.geometry}
+        material={materials.Material}
+        rotation={[-0.043, 0, 0]}
+        scale={0.028}
+      />
+      <mesh
+        geometry={nodes.Bügel2R.geometry}
+        material={materials.GlassesFront}
+        rotation={[Math.PI, 1.5, 3.099]}
+        scale={0.028}
+      />
     </group>
   );
 };

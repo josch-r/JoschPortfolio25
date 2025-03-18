@@ -64,69 +64,23 @@ const Agent = React.memo(({ radius }: { radius: number }) => {
   );
 });
 
-// Add this hook to your component
 
-// const useResponsiveKnobGroup = () => {
-//   const [position, setPosition] = useState<[number, number, number]>([
-//     12, -6, -7,
-//   ]);
-//   const [rotation, setRotation] = useState<[number, number, number]>([
-//     -0.2, -0.6, 0,
-//   ]);
-
-//   useEffect(() => {
-//     const handleResize = () => {
-//       // Mobile (< 768px)
-//       if (window.innerWidth < 768) {
-//         setPosition([0, -8, -8] as [number, number, number]);
-//         setRotation([0, 0, 0] as [number, number, number]);
-//       }
-//       // Tablet (768px - 1024px)
-//       else if (window.innerWidth < 1280) {
-//         setPosition([0, -7, -6] as [number, number, number]);
-//         setRotation([0, 0, 0] as [number, number, number]);
-//       }
-//       // Desktop
-//       else {
-//         setPosition([12, -6, -7] as [number, number, number]);
-//         setRotation([-0.2, -0.6, 0] as [number, number, number]);
-//       }
-//     };
-
-//     // Set initial position
-//     handleResize();
-
-//     // Update on resize
-//     window.addEventListener("resize", handleResize);
-//     return () => window.removeEventListener("resize", handleResize);
-//   }, []);
-
-//   return { position, rotation };
-// };
-
-// Add displayName for better debugging
 Agent.displayName = "Agent";
 
 export function HeroScene() {
   const radius = 5;
   const [stepSize, setStepSize] = useState(0.03);
   const [noiseScale, setNoiseScale] = useState(0.1);
-  // const [showValues, setShowValues] = useState<boolean>(false);
-  // const [randomness, setRandomness] = useState(0.02);
+  const [modelUrl, setModelUrl] = useState("/models/josch50k4.glb");
 
   const [particleCount, setParticleCount] = useState(20000);
 
-  // Add these handler functions before the return statement
   const handleStepSizeChange = (value: number) => {
     setStepSize(value);
-    // setShowValues(true);
-    // setTimeout(() => setShowValues(false), 2000);
   };
 
   const handleNoiseScaleChange = (value: number) => {
     setNoiseScale(value);
-    // setShowValues(true);
-    // setTimeout(() => setShowValues(false), 2000);
   };
 
   useEffect(() => {
@@ -139,13 +93,14 @@ export function HeroScene() {
 
     if (isMobile || isLowPerfDevice) {
       setParticleCount(7000); // Lower count for mobile/low-end devices
+      setModelUrl("/models/josch14kMobile.glb");
       // setCustomData(7000);
     } else if (cpuCores <= 6) {
       setParticleCount(10000); // Medium count for mid-range devices
       // setCustomData(10000);
       console.log("Medium count for mid-range devices");
+      setModelUrl("/models/josch14kMobile.glb");
     }
-    // High-end devices keep the default 20000
   }, []);
 
   return (
@@ -180,6 +135,7 @@ export function HeroScene() {
             onNoiseScaleChange={handleNoiseScaleChange}
             initialStepSize={stepSize}
             initialNoiseScale={noiseScale}
+            modelUrl={modelUrl}
           />
           {/* <Perf
             position="bottom-left"

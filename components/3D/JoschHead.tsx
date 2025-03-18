@@ -6,8 +6,8 @@ import { GLTF } from "three-stdlib";
 
 // Configuration variables
 const HEAD_CONTROL = {
-  maxRotationX: 0.2, // Maximum X rotation (controls Step Size)
-  maxRotationY: 0.8, // Maximum Y rotation (controls Noise Scale)
+  maxRotationX: 0.5, // Maximum X rotation (controls Step Size)
+  maxRotationY: 1, // Maximum Y rotation (controls Noise Scale)
   smoothing: 0.1, // Smoothing factor (lower = smoother but slower)
 };
 
@@ -165,10 +165,9 @@ export const JoschHead = ({
   };
 
   return (
-    <group ref={groupRef} dispose={null} rotation={baseRotation} scale={0.013}>
+    <group ref={groupRef} dispose={null} rotation={baseRotation} scale={0.013}  >
       <Suspense fallback={<Model url="/models/josch2k.glb" />}>
         <Brille />
-
         <Model url="/models/josch50k3.glb" onPointerDown={handlePointerDown} />
       </Suspense>
     </group>

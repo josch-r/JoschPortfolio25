@@ -35,15 +35,37 @@ export default function PrivacyPolicy() {
           are used exclusively to ensure the smooth operation of the website and
           are regularly deleted.
         </p>
+        <h3 className="text-heading-medium mt-5">
+          Vercel Analytics and Speed insights
+        </h3>
+        <p>
+          This website uses Vercel Analytics and Speed Insights to collect
+          anonymous usage data for statistical purposes. These services do not
+          collect or store any personal information that would enable the
+          reconstruction of an individual&apos;s browsing session or identify a
+          user. The data collected includes:
+        </p>
+        <ul className="list-main">
+          <li className="list-item">Route and URL Network speed</li>
+          <li className="list-item">Browser type and version Device type and operating system</li>
+          <li className="list-item">Country (ISO 3166-1 alpha-2 code)</li>
+          <li className="list-item">Web Vital metrics</li>
+          <li className="list-item">SDK information</li>
+        </ul>
+        <p>
+          This data is used to analyze overall trends in website traffic and
+          improve performance. No personal data is collected, and no cookies are
+          used for these services.
+        </p>
         <h3 className="text-heading-medium mt-5">Embedded YouTube Videos</h3>
         <p>
           I embed YouTube videos on my website. The provider is Google Ireland
           Limited, Gordon House, Barrow Street, Dublin 4, Ireland. When you play
-          a video, a connection to YouTube&apos;s servers is established. The YouTube
-          server is informed about which pages you have visited. If you are
-          logged into your YouTube account, you allow YouTube to associate your
-          browsing behavior directly with your personal profile. You can prevent
-          this by logging out of your YouTube account. Furthermore, when
+          a video, a connection to YouTube&apos;s servers is established. The
+          YouTube server is informed about which pages you have visited. If you
+          are logged into your YouTube account, you allow YouTube to associate
+          your browsing behavior directly with your personal profile. You can
+          prevent this by logging out of your YouTube account. Furthermore, when
           starting a video, YouTube may store various cookies on your device or
           use similar recognition technologies (e.g., device fingerprinting).
           This allows YouTube to collect information about visitors to this

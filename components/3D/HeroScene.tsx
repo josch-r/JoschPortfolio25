@@ -136,7 +136,7 @@ export function HeroScene() {
     const cpuCores = window.navigator.hardwareConcurrency || 4;
 
     // setCustomData(20000);
-    console.log("Device detection:", { isMobile, cpuCores });
+    // console.log("Device detection:", { isMobile, cpuCores });
 
     if (isMobile || isLowPerfDevice) {
       setParticleCount(7000); // Lower count for mobile/low-end devices

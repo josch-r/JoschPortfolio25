@@ -9,7 +9,8 @@ import {
   useScroll,
   motion,
 } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import path from "path";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -34,6 +35,12 @@ export function Navbar() {
       }
     }
   });
+
+  useEffect(() => {
+    if (pathname === "/imprint" || pathname === "/privacy-policy") {
+      setVisible(true);
+    }
+  }, [pathname]);
 
   const isActive = (path: string) => {
     if (path === "/" && pathname === "/") return true;

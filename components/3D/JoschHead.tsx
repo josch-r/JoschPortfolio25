@@ -145,7 +145,7 @@ export const JoschHead = ({
     }
 
     // Add event listeners
-    window.addEventListener("mousemove", handleMouseMove)
+    window.addEventListener("mousemove", handleMouseMove, { passive: false })
     window.addEventListener("mouseup", handleEnd)
     window.addEventListener("touchmove", handleMouseMove, { passive: false })
     window.addEventListener("touchend", handleEnd)

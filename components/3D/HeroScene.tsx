@@ -3,7 +3,7 @@
 import { Environment } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import React, { Suspense, useEffect, useRef, useState } from "react";
-import { Perf } from "r3f-perf";
+// import { Perf } from "r3f-perf";
 import dynamic from "next/dynamic";
 import { JoschHead } from "./JoschHead";
 import { createNoise3D } from "simplex-noise";
@@ -181,7 +181,7 @@ export function HeroScene() {
             initialStepSize={stepSize}
             initialNoiseScale={noiseScale}
           />
-          <Perf
+          {/* <Perf
             position="bottom-left"
             customData={{
               value: particleCount,
@@ -189,7 +189,7 @@ export function HeroScene() {
               info: "" as unknown as number,
               round: 0, // No decimal places needed for particle count
             }}
-          />
+          /> */}
         </Suspense>
       </Canvas>
     </motion.div>

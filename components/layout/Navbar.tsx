@@ -10,7 +10,6 @@ import {
   motion,
 } from "framer-motion";
 import { useEffect, useState } from "react";
-import path from "path";
 
 export function Navbar() {
   const pathname = usePathname();

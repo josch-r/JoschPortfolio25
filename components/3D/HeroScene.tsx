@@ -57,7 +57,7 @@ const Agent = React.memo(({ radius }: { radius: number }) => {
         ref={lightRef}
         intensity={0.95}
         distance={9}
-        decay={2}
+        decay={1.8}
         color="#ffffff"
       />
     </>

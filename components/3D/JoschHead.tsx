@@ -124,13 +124,13 @@ export const JoschHead = ({
 
       // Update target rotation (not directly updating the mesh)
       targetRotation.current.y = THREE.MathUtils.clamp(
-        targetRotation.current.y + deltaX * 0.005,
+        targetRotation.current.y + deltaX * 0.0015,
         baseRotation[1] - HEAD_CONTROL.maxRotationY,
         baseRotation[1] + HEAD_CONTROL.maxRotationY,
       )
 
       targetRotation.current.x = THREE.MathUtils.clamp(
-        targetRotation.current.x + deltaY * 0.005,
+        targetRotation.current.x + deltaY * 0.0015,
         baseRotation[0] - HEAD_CONTROL.maxRotationX,
         baseRotation[0] + HEAD_CONTROL.maxRotationX,
       )

@@ -12,7 +12,6 @@ import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 const slug = "wiwa";
 
-// Optionally, look up your project data based on this slug:
 const projectData = projects.find((p) => p.slug === slug);
 
 export async function generateMetadata(): Promise<Metadata> {

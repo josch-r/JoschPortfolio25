@@ -3,7 +3,6 @@
 import React, { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import { createNoise3D } from "simplex-noise";
-// import { useControls } from "leva"
 import type * as THREE from "three";
 import { Points, PointMaterial } from "@react-three/drei";
 
@@ -23,15 +22,12 @@ const AgentsScene = React.memo(
   }) => {
     const pointsRef = useRef<THREE.Points>(null);
 
-    // const stepSize = 0.03;
-    // const noiseScale = 0.1;
     const pointSize = 0.04;
     const pointOpacity = 0.75;
     const boundaryX = 26;
     const boundaryY = 14;
     const boundaryZNear = 0;
     const boundaryZFar = -35;
-    // const randomness = 0.02;
     const timeInfluence = 0.1;
     const resetProbability = 0.002;
     const velocityFactor = 0.05;

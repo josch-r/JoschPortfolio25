@@ -1,3 +1,5 @@
+//UNUSED COMPONENT KEEPING IT FOR THE SAKE OF "COMPLETENESS"
+
 import React, { useRef, useState, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Text, useGLTF } from "@react-three/drei";

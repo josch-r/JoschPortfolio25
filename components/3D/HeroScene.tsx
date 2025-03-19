@@ -55,7 +55,7 @@ const Agent = React.memo(({ radius }: { radius: number }) => {
       </mesh>
       <pointLight
         ref={lightRef}
-        intensity={0.75}
+        intensity={0.95}
         distance={9}
         decay={2}
         color="#ffffff"
@@ -125,7 +125,7 @@ export function HeroScene() {
             noiseScale={noiseScale}
             randomness={0.02}
           />
-          {Array.from({ length: 30 }).map((_, i) => (
+          {Array.from({ length: 15 }).map((_, i) => (
             <Agent key={i} radius={radius} />
           ))}
 

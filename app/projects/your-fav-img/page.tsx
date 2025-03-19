@@ -11,7 +11,6 @@ import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 const slug = "your-fav-img";
 
-// Optionally, look up your project data based on this slug:
 const projectData = archivedProjects.find((p) => p.slug === slug);
 
 export async function generateMetadata(): Promise<Metadata> {

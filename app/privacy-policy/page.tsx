@@ -8,10 +8,7 @@ export default function PrivacyPolicy() {
         <p className="text-heading-medium mt-10">Responsible Entity</p>
         <ul>
           <li>Name: Joschua Rothenbacher</li>
-          <li>Uferstraße 48</li>
-          <li>73525 Schwäbisch Gmünd</li>
           <li>E-Mail: j.rothenbacher@yahoo.de</li>
-          <li>Phone: 01573 9082816</li>
         </ul>
         <h3 className="text-heading-medium mt-5">General Information</h3>
         <p>

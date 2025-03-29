@@ -10,8 +10,6 @@ export default function Impressum() {
         </p>
         <ul>
           <li>Joschua Rothenbacher</li>
-          <li>Uferstraße 48</li>
-          <li>73525 Schwäbisch Gmünd</li>
         </ul>
         <h3 className="text-heading-medium mt-5">Contact:</h3>
         <ul>

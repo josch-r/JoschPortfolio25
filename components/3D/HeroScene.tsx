@@ -3,7 +3,6 @@
 import { Environment } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import React, { Suspense, useEffect, useRef, useState } from "react";
-// import { Perf } from "r3f-perf";
 import dynamic from "next/dynamic";
 import { JoschHead } from "./JoschHead";
 import { createNoise3D } from "simplex-noise";
@@ -15,6 +14,49 @@ import { Html } from "@react-three/drei";
 const NoisePoints = dynamic(() => import("./NoisePoints"), { ssr: false });
 
 const noise3D = createNoise3D();
+
+// Performance monitoring component with model switching
+const PerformanceMonitor = ({ onPerformanceIssue }: { onPerformanceIssue: () => void }) => {
+  const lastTime = useRef(performance.now());
+  const frameCount = useRef(0);
+  const lowFpsCount = useRef(0);
+  const fpsThreshold = 25; // FPS threshold to consider as "bad performance"
+  const consecutiveFramesThreshold = 3; // Number of consecutive low FPS frames before logging
+
+  useFrame(() => {
+    frameCount.current++;
+    
+    // Check FPS every 20 frames (more frequent checks)
+    if (frameCount.current % 20 === 0) {
+      const currentTime = performance.now();
+      const elapsedTime = currentTime - lastTime.current;
+      // FPS calculation: number of frames (20) divided by elapsed time in seconds
+      const fps = Math.round((20 * 1000) / elapsedTime);
+      
+      // Reset timer for next measurement
+      lastTime.current = currentTime;
+      
+      // Check if FPS is below threshold
+      if (fps < fpsThreshold) {
+        lowFpsCount.current++;
+        
+        // If we've had several consecutive low FPS measurements
+        if (lowFpsCount.current >= consecutiveFramesThreshold) {
+          // console.log(`Performance warning: FPS is ${fps} (below ${fpsThreshold}) for ${lowFpsCount.current} consecutive measurements`);
+          // Trigger model switch
+          onPerformanceIssue();
+          // Reset counter after logging to avoid spam
+          lowFpsCount.current = 0;
+        }
+      } else {
+        // Reset counter if FPS is good
+        lowFpsCount.current = 0;
+      }
+    }
+  });
+
+  return null;
+};
 
 const Agent = React.memo(({ radius }: { radius: number }) => {
   const ref = useRef(new THREE.Mesh());
@@ -72,8 +114,10 @@ export function HeroScene() {
   const [stepSize, setStepSize] = useState(0.03);
   const [noiseScale, setNoiseScale] = useState(0.1);
   const [modelUrl, setModelUrl] = useState("/models/josch50k4.glb");
-
   const [particleCount, setParticleCount] = useState(20000);
+  const [sceneKey, setSceneKey] = useState(0); // Key to force scene remount
+  const [IsMediumMode, setIsMediumMode] = useState(false);
+  const [isLowMode, setIsLowMode] = useState(false);
 
   const handleStepSizeChange = (value: number) => {
     setStepSize(value);
@@ -81,6 +125,25 @@ export function HeroScene() {
 
   const handleNoiseScaleChange = (value: number) => {
     setNoiseScale(value);
+  };
+
+  // Function to handle performance issues
+  const handlePerformanceIssue = () => {
+    if (!IsMediumMode && !isLowMode) {
+      console.log("Reloading scene with medium quality model due to performance issues");
+      setIsMediumMode(true);
+      setModelUrl("/models/josch14kMobile.glb");
+      setParticleCount(7000);
+      
+      // Force a complete scene remount by changing the key
+      setSceneKey(prevKey => prevKey + 1);
+    } else if (!isLowMode) {
+      setIsLowMode(true);
+      console.log("Reloading scene with low poly model due to performance issues");
+      setModelUrl("/models/josch2k.glb");
+      setParticleCount(4000);
+      setSceneKey(prevKey => prevKey + 1);
+    }
   };
 
   useEffect(() => {
@@ -94,12 +157,14 @@ export function HeroScene() {
     if (isMobile || isLowPerfDevice) {
       setParticleCount(7000); // Lower count for mobile/low-end devices
       setModelUrl("/models/josch14kMobile.glb");
+      setIsMediumMode(true);
       // setCustomData(7000);
     } else if (cpuCores <= 6) {
       setParticleCount(10000); // Medium count for mid-range devices
       // setCustomData(10000);
       console.log("Medium count for mid-range devices");
       setModelUrl("/models/josch14kMobile.glb");
+      setIsMediumMode(true);
     }
   }, []);
 
@@ -111,7 +176,10 @@ export function HeroScene() {
       transition={{ duration: 1.75 }}
       className="absolute w-full h-[100vh]"
     >
-      <Canvas camera={{ position: [0, -1, 10], fov: 60 }}>
+      <Canvas 
+        camera={{ position: [0, -1, 10], fov: 60 }}
+        key={sceneKey} // Key to force remount
+      >
         <Suspense fallback={<Loader />}>
           <Environment
             preset="night"
@@ -137,12 +205,16 @@ export function HeroScene() {
             initialNoiseScale={noiseScale}
             modelUrl={modelUrl}
           />
+          
+          {/* Performance monitoring component */}
+          <PerformanceMonitor onPerformanceIssue={handlePerformanceIssue} />
+          
           {/* <Perf
             position="bottom-left"
             customData={{
               value: particleCount,
               name: "Particle count" as unknown as number,
-              info: "" as unknown as number,
+              info: "particles" as unknown as number,
               round: 0, // No decimal places needed for particle count
             }}
           /> */}

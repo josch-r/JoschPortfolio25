@@ -10,7 +10,8 @@ export function HeroSection() {
   const scrollToWork = useCallback(() => {
     const workSection = document.getElementById("work");
     if (workSection) {
-      workSection.scrollIntoView({ behavior: "smooth" });
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      workSection.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth" });
     }
   }, []);
 
@@ -36,14 +37,14 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{
               duration: 0.4,
-              ease: "easeOut",
+              ease: [0.215, 0.61, 0.355, 1],
             }}
             onClick={scrollToWork}
             aria-label="Take a look at what I do"
-            className="group inline-flex items-center text-link hover:text-primary/90 transition-colors no-underline mb-12 cursor-pointer pointer-events-auto"
+            className="group inline-flex items-center text-link hover:text-primary/90 transition-colors no-underline mb-12 cursor-pointer pointer-events-auto active:scale-[0.97] transition-transform duration-100"
           >
             <span className="mr-1">Take a look at what I do</span>
-            <ArrowDownRight aria-hidden="true" className="text-primary group-hover:rotate-45 transition-all ease-in duration-200" />
+            <ArrowDownRight aria-hidden="true" className="text-primary group-hover:rotate-45 transition-transform ease-out duration-200" />
           </motion.button>
         </section>
       </GridLayout>

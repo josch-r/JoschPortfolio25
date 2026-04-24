@@ -122,27 +122,27 @@ export default function ProjectPage() {
             </p>
             <ul className="list-main">
               <li className="list-item">
-                <ArrowRight size={16} className="transition-all duration-200" />
+                <ArrowRight size={16} />
                 <span>
                   Developed and implemented the projection mapping system using
                   MadMapper
                 </span>
               </li>
               <li className="list-item">
-                <ArrowRight size={16} className="transition-all duration-200" />
+                <ArrowRight size={16} />
                 <span>
                   Created the interactive elements using Bare Conductive Board
                   and copper foil sensors
                 </span>
               </li>
               <li className="list-item">
-                <ArrowRight size={16} className="transition-all duration-200" />
+                <ArrowRight size={16} />
                 <span>
                   Contributed to concept development and hardware integration
                 </span>
               </li>
               <li className="list-item">
-                <ArrowRight size={16} className="transition-all duration-200" />
+                <ArrowRight size={16} />
                 <span>
                   Supported the team with 3D rendering and visualization work
                 </span>

@@ -56,14 +56,12 @@
   align-items: center;
   z-index: 50;
   padding: 2rem;
-  animation: fadeIn 0.2s ease-out;
 }
 
 .expandedImageContainer {
   position: relative;
   max-width: 90vw;
   max-height: 90vh;
-  animation: scaleIn 0.3s ease-out;
 }
 
 .expandedImage {
@@ -74,7 +72,7 @@
   object-fit: contain;
   border-radius: 0.5rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  transition: opacity 1s;
+  transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
 .closeButton {
@@ -106,25 +104,6 @@
   max-width: 80vw;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

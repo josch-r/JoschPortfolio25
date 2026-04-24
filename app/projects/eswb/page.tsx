@@ -118,27 +118,27 @@ export default function ProjectPage() {
             </p>
             <ul className="list-main">
               <li className="list-item">
-                <ArrowRight size={16} className="transition-all duration-200" />
+                <ArrowRight size={16} />
                 <span>
                   A large screen with headphones, playing music from the era.
                 </span>
               </li>
               <li className="list-item">
-                <ArrowRight size={16} className="transition-all duration-200" />
+                <ArrowRight size={16} />
                 <span>
                   A NUC running archival interviews, offering deeper insights
                   into the graffiti scene.
                 </span>
               </li>
               <li className="list-item">
-                <ArrowRight size={16} className="transition-all duration-200" />
+                <ArrowRight size={16} />
                 <span>
                   A big screen displaying the app’s interactive map, visualizing
                   key locations.
                 </span>
               </li>
               <li className="list-item">
-                <ArrowRight size={16} className="transition-all duration-200" />
+                <ArrowRight size={16} />
                 <span>
                   Multiple tablets showcasing scanned writing books, allowing
                   visitors to flip through pages interactively.

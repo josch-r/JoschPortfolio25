@@ -4,6 +4,7 @@ import type React from "react";
 import { useState } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import styles from "./gallery.module.css";
 
 interface Image {
@@ -20,7 +21,6 @@ export default function Gallery({ images }: GalleryProps) {
   const [expandedImage, setExpandedImage] = useState<Image | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Split images into two arrays for left and right columns
   const leftColumnImages = images.filter((_, i) => i % 2 === 0);
   const rightColumnImages = images.filter((_, i) => i % 2 !== 0);
 
@@ -33,14 +33,12 @@ export default function Gallery({ images }: GalleryProps) {
     setExpandedImage(null);
   };
 
-  // Close expanded image when clicking outside of it
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       handleCloseExpanded();
     }
   };
 
-  // Handle escape key press to close expanded image
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Escape") {
       handleCloseExpanded();
@@ -85,43 +83,54 @@ export default function Gallery({ images }: GalleryProps) {
                 sizes="(max-width: 768px) 50vw, 33vw"
               />
               <div className={styles.captionOverlay} />
-              {/* <p className={styles.imageCaption}>{img.caption}</p> */}
             </div>
           ))}
         </div>
       </div>
 
-      {/* Expanded image overlay */}
-      {expandedImage && (
-        <div
-          className={styles.expandedOverlay}
-          onClick={handleOverlayClick}
-          onKeyDown={handleKeyDown}
-          tabIndex={0}
-          role="button"
-          aria-label="Close expanded image"
-        >
-          <div className={styles.expandedImageContainer}>
-            <button
-              className={styles.closeButton}
-              onClick={handleCloseExpanded}
-              aria-label="Close expanded image"
+      <AnimatePresence>
+        {expandedImage && (
+          <motion.div
+            key="lightbox-overlay"
+            className={styles.expandedOverlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
+            onClick={handleOverlayClick}
+            onKeyDown={handleKeyDown}
+            tabIndex={0}
+            role="button"
+            aria-label="Close expanded image"
+          >
+            <motion.div
+              className={styles.expandedImageContainer}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.25, ease: [0.215, 0.61, 0.355, 1] }}
             >
-              <X size={24} />
-            </button>
-            <Image
-              src={expandedImage.src || "/placeholder.svg"}
-              alt={expandedImage.caption}
-              width={1200}
-              height={800}
-              onLoadingComplete={() => setIsLoading(false)}      
-              className={styles.expandedImage + (isLoading ? " opacity-0" : "")}
-              sizes="90vw"
-            />
-            <p className={styles.expandedCaption}>{expandedImage.caption}</p>
-          </div>
-        </div>
-      )}
+              <button
+                className={styles.closeButton}
+                onClick={handleCloseExpanded}
+                aria-label="Close expanded image"
+              >
+                <X size={24} />
+              </button>
+              <Image
+                src={expandedImage.src || "/placeholder.svg"}
+                alt={expandedImage.caption}
+                width={1200}
+                height={800}
+                onLoadingComplete={() => setIsLoading(false)}
+                className={styles.expandedImage + (isLoading ? " opacity-0" : "")}
+                sizes="90vw"
+              />
+              <p className={styles.expandedCaption}>{expandedImage.caption}</p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

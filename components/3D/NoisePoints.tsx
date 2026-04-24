@@ -8,6 +8,28 @@ import { Points, PointMaterial } from "@react-three/drei";
 
 const noise3D = createNoise3D();
 
+const BOUNDARY_X = 26;
+const BOUNDARY_Y = 14;
+const BOUNDARY_Z_NEAR = 0;
+const BOUNDARY_Z_FAR = -35;
+const TIME_INFLUENCE = 0.1;
+const RESET_PROBABILITY = 0.002;
+const VELOCITY_FACTOR = 0.05;
+const POINT_SIZE = 0.04;
+const POINT_OPACITY = 0.75;
+
+const wrapValue = (value: number, min: number, max: number): number => {
+  const range = max - min;
+  return ((((value - min) % range) + range) % range) + min;
+};
+
+const resetParticle = (i3: number, positions: Float32Array) => {
+  positions[i3] = (Math.random() - 0.5) * 2 * BOUNDARY_X;
+  positions[i3 + 1] = (Math.random() - 0.5) * 2 * BOUNDARY_Y;
+  positions[i3 + 2] =
+    BOUNDARY_Z_FAR + Math.random() * (BOUNDARY_Z_NEAR - BOUNDARY_Z_FAR);
+};
+
 const AgentsScene = React.memo(
   ({
     a_count = 20000,
@@ -22,50 +44,22 @@ const AgentsScene = React.memo(
   }) => {
     const pointsRef = useRef<THREE.Points>(null);
 
-    const pointSize = 0.04;
-    const pointOpacity = 0.75;
-    const boundaryX = 26;
-    const boundaryY = 14;
-    const boundaryZNear = 0;
-    const boundaryZFar = -35;
-    const timeInfluence = 0.1;
-    const resetProbability = 0.002;
-    const velocityFactor = 0.05;
-
     const [positions, colors, velocities] = useMemo(() => {
       const positions = new Float32Array(a_count * 3);
       const colors = new Float32Array(a_count * 3);
       const velocities = new Float32Array(a_count * 3);
       for (let i = 0; i < a_count; i++) {
-        positions[i * 3] = (Math.random() - 0.5) * 2 * boundaryX;
-        positions[i * 3 + 1] = (Math.random() - 0.5) * 2 * boundaryY;
-        positions[i * 3 + 2] =
-          Math.random() * (boundaryZNear - boundaryZFar) + boundaryZFar;
-        colors[i * 3] = Math.random();
-        colors[i * 3 + 1] = Math.random();
-        colors[i * 3 + 2] = Math.random();
-        velocities[i * 3] = 0;
-        velocities[i * 3 + 1] = 0;
-        velocities[i * 3 + 2] = 0;
+        const i3 = i * 3;
+        positions[i3] = (Math.random() - 0.5) * 2 * BOUNDARY_X;
+        positions[i3 + 1] = (Math.random() - 0.5) * 2 * BOUNDARY_Y;
+        positions[i3 + 2] =
+          Math.random() * (BOUNDARY_Z_NEAR - BOUNDARY_Z_FAR) + BOUNDARY_Z_FAR;
+        colors[i3] = Math.random();
+        colors[i3 + 1] = Math.random();
+        colors[i3 + 2] = Math.random();
       }
       return [positions, colors, velocities];
-    }, [boundaryX, boundaryY, boundaryZNear, boundaryZFar, a_count]);
-
-    const wrapValue = useMemo(
-      () =>
-        (value: number, min: number, max: number): number => {
-          const range = max - min;
-          return ((((value - min) % range) + range) % range) + min;
-        },
-      []
-    );
-
-    const resetParticle = (index: number, positions: Float32Array) => {
-      positions[index] = (Math.random() - 0.5) * 2 * boundaryX;
-      positions[index + 1] = (Math.random() - 0.5) * 2 * boundaryY;
-      positions[index + 2] =
-        boundaryZFar + Math.random() * (boundaryZNear - boundaryZFar);
-    };
+    }, [a_count]);
 
     useFrame(({ clock }) => {
       if (!pointsRef.current) return;
@@ -75,67 +69,62 @@ const AgentsScene = React.memo(
         "position"
       ) as THREE.BufferAttribute;
       const positions = positionAttribute.array as Float32Array;
+      const timeOffset = time * TIME_INFLUENCE;
 
-      const timeOffset = time * timeInfluence;
-      const noiseOffsets = new Float32Array(a_count * 3);
       for (let i = 0; i < a_count; i++) {
         const i3 = i * 3;
-        noiseOffsets[i3] =
-          noise3D(
-            positions[i3] * noiseScale,
-            positions[i3 + 1] * noiseScale,
-            positions[i3 + 2] * noiseScale + timeOffset
-          ) *
-          Math.PI *
-          2;
-        noiseOffsets[i3 + 1] =
-          noise3D(
-            positions[i3] * noiseScale + 100,
-            positions[i3 + 1] * noiseScale + 100,
-            positions[i3 + 2] * noiseScale + timeOffset
-          ) *
-          Math.PI *
-          2;
-        noiseOffsets[i3 + 2] = Math.random() * randomness;
-      }
+        const px = positions[i3];
+        const py = positions[i3 + 1];
+        const pz = positions[i3 + 2];
 
-      positions.forEach((_, i) => {
-        const i3 = i * 3;
+        const angleX =
+          noise3D(
+            px * noiseScale,
+            py * noiseScale,
+            pz * noiseScale + timeOffset
+          ) *
+          Math.PI *
+          2;
+        const angleY =
+          noise3D(
+            px * noiseScale + 100,
+            py * noiseScale + 100,
+            pz * noiseScale + timeOffset
+          ) *
+          Math.PI *
+          2;
+        const randomOffset = Math.random() * randomness;
+
         velocities[i3] =
-          velocities[i3] * velocityFactor +
-          (Math.cos(noiseOffsets[i3]) * stepSize + noiseOffsets[i3 + 2]);
+          velocities[i3] * VELOCITY_FACTOR +
+          Math.cos(angleX) * stepSize +
+          randomOffset;
         velocities[i3 + 1] =
-          velocities[i3 + 1] * velocityFactor +
-          (Math.sin(noiseOffsets[i3]) * stepSize + noiseOffsets[i3 + 2]);
-        const z = positions[i3 + 2] + velocities[i3 + 2] * velocityFactor;
-        const angle2 = noiseOffsets[i3 + 1];
-        const randomOffset = noiseOffsets[i3 + 2];
-        positions[i3 + 2] = wrapValue(
-          z +
-            (Math.cos(angle2) + Math.sin(angle2)) * 0.5 * stepSize +
-            randomOffset,
-          boundaryZFar,
-          boundaryZNear
-        );
+          velocities[i3 + 1] * VELOCITY_FACTOR +
+          Math.sin(angleX) * stepSize +
+          randomOffset;
 
-        positions[i3] = wrapValue(
-          positions[i3] + velocities[i3],
-          -boundaryX,
-          boundaryX
-        );
+        positions[i3] = wrapValue(px + velocities[i3], -BOUNDARY_X, BOUNDARY_X);
         positions[i3 + 1] = wrapValue(
-          positions[i3 + 1] + velocities[i3 + 1],
-          -boundaryY,
-          boundaryY
+          py + velocities[i3 + 1],
+          -BOUNDARY_Y,
+          BOUNDARY_Y
+        );
+        positions[i3 + 2] = wrapValue(
+          pz +
+            (Math.cos(angleY) + Math.sin(angleY)) * 0.5 * stepSize +
+            randomOffset,
+          BOUNDARY_Z_FAR,
+          BOUNDARY_Z_NEAR
         );
 
-        if (Math.random() < resetProbability) {
+        if (Math.random() < RESET_PROBABILITY) {
           resetParticle(i3, positions);
           velocities[i3] = 0;
           velocities[i3 + 1] = 0;
           velocities[i3 + 2] = 0;
         }
-      });
+      }
 
       positionAttribute.needsUpdate = true;
     });
@@ -145,10 +134,10 @@ const AgentsScene = React.memo(
         <PointMaterial
           transparent
           vertexColors
-          size={pointSize}
+          size={POINT_SIZE}
           sizeAttenuation={true}
           depthWrite={false}
-          opacity={pointOpacity}
+          opacity={POINT_OPACITY}
         />
       </Points>
     );
@@ -168,7 +157,14 @@ const NoisePoints = ({
   noiseScale?: number;
   randomness?: number;
 }) => {
-  return <AgentsScene a_count={count} stepSize={stepSize} noiseScale={noiseScale} randomness={randomness}/>;
+  return (
+    <AgentsScene
+      a_count={count}
+      stepSize={stepSize}
+      noiseScale={noiseScale}
+      randomness={randomness}
+    />
+  );
 };
 
 export default NoisePoints;

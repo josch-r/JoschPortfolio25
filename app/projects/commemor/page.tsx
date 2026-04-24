@@ -110,10 +110,7 @@ export default function ProjectPage() {
               </p>
               <ul className="list-main">
                 <li className="list-item">
-                  <ArrowRight
-                    size={16}
-                    className="transition-all duration-200"
-                  />
+                  <ArrowRight size={16} />
                   <span>
                     Led the technical development and prototyping of the AR
                     functionality, including marker tracking and immersion level
@@ -121,10 +118,7 @@ export default function ProjectPage() {
                   </span>
                 </li>
                 <li className="list-item">
-                  <ArrowRight
-                    size={16}
-                    className="transition-all duration-200"
-                  />
+                  <ArrowRight size={16} />
                   <span>
                     Co-developed the core concept and UX framework, ensuring a
                     seamless blend between digital storytelling and physical
@@ -132,20 +126,14 @@ export default function ProjectPage() {
                   </span>
                 </li>
                 <li className="list-item">
-                  <ArrowRight
-                    size={16}
-                    className="transition-all duration-200"
-                  />
+                  <ArrowRight size={16} />
                   <span>
                     Created and validated user flows and interaction patterns
                     that make historical information accessible and engaging
                   </span>
                 </li>
                 <li className="list-item">
-                  <ArrowRight
-                    size={16}
-                    className="transition-all duration-200"
-                  />
+                  <ArrowRight size={16} />
                   <span>
                     Served as the bridge between conceptual design and technical
                     implementation, ensuring feasibility while maintaining the
@@ -187,26 +175,26 @@ export default function ProjectPage() {
             </p>
             <ul className="list-main">
               <li className="list-item">
-                <ArrowRight size={16} className="transition-all duration-200" />
+                <ArrowRight size={16} />
                 <span>
                   Adapt the concept for museum contexts and exhibitions
                 </span>
               </li>
               <li className="list-item">
-                <ArrowRight size={16} className="transition-all duration-200" />
+                <ArrowRight size={16} />
                 <span>
                   Expand functionality to include other historical monuments and
                   information boards
                 </span>
               </li>
               <li className="list-item">
-                <ArrowRight size={16} className="transition-all duration-200" />
+                <ArrowRight size={16} />
                 <span>
                   Enhance exhibition experiences through interactive AR elements
                 </span>
               </li>
               <li className="list-item">
-                <ArrowRight size={16} className="transition-all duration-200" />
+                <ArrowRight size={16} />
                 <span>
                   Create digital representations of Holocaust victims using AI
                   technology, including voice recreation and interactive

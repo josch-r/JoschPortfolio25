@@ -1,7 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import { GridLayout } from "@/components/layout/GridLayout";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 import Link from "next/link";
+
+const viewport = { once: true, margin: "-10%" };
 
 export default function ProjectSection() {
   const projects = [
@@ -27,19 +32,31 @@ export default function ProjectSection() {
 
   return (
     <GridLayout aria-labelledby="projects-heading">
-      <h2
+      <motion.h2
         className="col-span-1 md:col-span-12 text-heading-medium !font-normal md:ms-8 mt-16"
         id="projects-heading"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={viewport}
+        transition={{ duration: 0.4, ease: [0.215, 0.61, 0.355, 1] }}
       >
         Selected Work
-      </h2>
+      </motion.h2>
       {projects.map(
         ({ name, slug, thumbnail, date, type, textColor, index }) => (
-          <div
+          <motion.div
             key={index}
             className={`col-span-1 md:col-span-12 lg:col-span-6 md:px-8 lg:px-0   ${
               index > 0 ? "lg:pr-8" : "lg:pl-8"
             }`}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={viewport}
+            transition={{
+              duration: 0.4,
+              ease: [0.215, 0.61, 0.355, 1],
+              delay: index * 0.08,
+            }}
           >
             <Link href={`/projects/${slug.toLowerCase()}`}>
               <div className="relative w-full aspect-video cursor-pointer">
@@ -47,7 +64,7 @@ export default function ProjectSection() {
                   src={thumbnail}
                   alt={`${name} project thumbnail - ${type}`}
                   fill
-                  className="rounded-md md:saturate-0 object-contain hover:saturate-100 transition-all ease-in duration-300"
+                  className="rounded-md md:saturate-0 object-contain hover:saturate-100 transition-[filter] ease-out duration-300"
                 />
                 <div className="absolute bottom-0 left-0 ps-8 pb-5">
                   <h3 className={`text-hero !${textColor}`}>{name}</h3>
@@ -57,46 +74,22 @@ export default function ProjectSection() {
                 </div>
               </div>
             </Link>
-          </div>
+          </motion.div>
         )
       )}
-      <div className="flex justify-end pt-auto col-span-1 md:col-span-12 md:me-8">
+      <motion.div
+        className="flex justify-end pt-auto col-span-1 md:col-span-12 md:me-8"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={viewport}
+        transition={{ duration: 0.4, ease: [0.215, 0.61, 0.355, 1], delay: 0.16 }}
+      >
         <Link href="/projects" aria-label="View all projects">
           <Button variant="default" className="cursor-pointer">
             View all projects
           </Button>
         </Link>
-      </div>
+      </motion.div>
     </GridLayout>
   );
-}
-
-{
-
-  /*
-  //hover anim with scale & blur
-  
-  <div
-              key={index}
-              className={`col-span-1 md:col-span-12 lg:col-span-6 md:px-8 lg:px-0   ${
-                index > 0 ? "lg:pr-8" : "lg:pl-8"
-              }`}
-            >
-              <Link href={`/projects/${slug.toLowerCase()}`}>
-                <div className="group relative w-full aspect-video cursor-pointer transition-all duration-300 ease-in-out hover:scale-[102%] hover:shadow-md">
-                  <Image
-                    src={thumbnail}
-                    alt={`${name} project thumbnail - ${type}`} 
-                    fill
-                    className="rounded-md object-contain group-hover:blur-[2px] transition-all duration-300"
-                  />
-                  <div className="absolute bottom-0 left-0 ps-8 pb-5">
-                    <h3 className={`text-hero !${textColor}`}>{name}</h3>
-                    <h4 className={`text-body-small !${textColor}`}>
-                      {type} | {date}
-                    </h4>
-                  </div>
-                </div>
-              </Link>
-            </div> */
 }

@@ -1,10 +1,23 @@
+"use client";
+
 import Image from "next/image";
 import { GridLayout } from "@/components/layout/GridLayout";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
 import { FaLinkedinIn, FaGithub } from "react-icons/fa";
-
+import { motion } from "framer-motion";
 import Link from "next/link";
+
+const revealVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (delay: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: [0.215, 0.61, 0.355, 1], delay },
+  }),
+};
+
+const viewport = { once: true, margin: "-10%" };
 
 export function AboutSection() {
   return (
@@ -13,7 +26,14 @@ export function AboutSection() {
         <AboutText />
         <ShortVita />
         <Education />
-        <div className="flex justify-end gap-2 pt-auto col-span-1 md:col-span-12 md:me-8">
+        <motion.div
+          className="flex justify-end gap-2 pt-auto col-span-1 md:col-span-12 md:me-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          custom={0.24}
+          variants={revealVariants}
+        >
           <Button
             variant="outline"
             size="icon"
@@ -41,7 +61,7 @@ export function AboutSection() {
           <Link href="/about" aria-label="Read more">
             <Button variant="secondary">Read more</Button>
           </Link>
-        </div>
+        </motion.div>
       </GridLayout>
     </section>
   );
@@ -49,7 +69,14 @@ export function AboutSection() {
 
 function AboutText() {
   return (
-    <div className="col-span-1 md:col-span-12 lg:col-span-4 md:mx-8">
+    <motion.div
+      className="col-span-1 md:col-span-12 lg:col-span-4 md:mx-8"
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewport}
+      custom={0}
+      variants={revealVariants}
+    >
       <h2 className="text-heading-medium !font-normal mb-5" id="about-heading">
         About me
       </h2>
@@ -75,11 +102,19 @@ function AboutText() {
         first, ensuring that every solution, whether digital or analog,
         addresses real needs with thoughtfulness and care.
       </p>
-    </div>
+    </motion.div>
   );
 }
+
 function ShortVita() {
   const experiences = [
+    {
+      year: "2025",
+      role: "Creative Technologist",
+      company: "SIMPLE GmbH",
+      location: "Cologne, Germany",
+      link: "https://simple.de",
+    },
     {
       year: "2024",
       role: "Supervisor Medialab",
@@ -94,25 +129,22 @@ function ShortVita() {
       location: "Cologne, Germany",
       link: "https://fluur.de",
     },
-    {
-      year: "2019",
-      role: "Software Developer Intern",
-      company: "Widerstand & Söhne",
-      location: "Ulm, Germany",
-      link: "https://www.widerstandundsoehne.de/",
-    },
   ];
 
   return (
-    <div className="col-span-1 md:col-span-12 lg:col-span-4 md:mx-8">
+    <motion.div
+      className="col-span-1 md:col-span-12 lg:col-span-4 md:mx-8"
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewport}
+      custom={0.08}
+      variants={revealVariants}
+    >
       <h2 className="text-heading-medium !font-normal mb-5">Short Vita</h2>
       <div className="grid gap-y-6">
         {experiences.map(({ year, role, company, location, link }) => (
           <div key={year} className="grid grid-cols-[auto_1fr] gap-x-16">
-            {/* Year Column */}
             <span className="text-body-small !text-text-tertiary">{year}</span>
-
-            {/* Job Info Column */}
             <div>
               <h3 className="text-body-small !font-medium">{role}</h3>
               <a
@@ -130,9 +162,10 @@ function ShortVita() {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
+
 function Education() {
   const education = [
     {
@@ -152,15 +185,19 @@ function Education() {
   ];
 
   return (
-    <div className="col-span-1 md:col-span-12 lg:col-span-4 md:mx-8">
+    <motion.div
+      className="col-span-1 md:col-span-12 lg:col-span-4 md:mx-8"
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewport}
+      custom={0.16}
+      variants={revealVariants}
+    >
       <h2 className="text-heading-medium !font-normal mb-5">Education</h2>
       <div className="grid gap-y-6">
         {education.map(({ year, degree, company, location, link }) => (
           <div key={year} className="grid grid-cols-[auto_1fr] gap-x-16">
-            {/* Year Column */}
             <span className="text-body-small !text-text-tertiary">{year}</span>
-
-            {/* Job Info Column */}
             <div>
               <h3 className="text-body-small !font-medium">{degree}</h3>
               <a
@@ -178,6 +215,6 @@ function Education() {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./Navbar.module.css";
 import {
-  AnimatePresence,
   useMotionValueEvent,
   useScroll,
   motion,
@@ -48,25 +47,24 @@ export function Navbar() {
   };
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.nav
-        className="w-full fixed z-10 bg-bg-primary/50 backdrop-blur-lg py-5 shadow-sm"
-        initial={{ opacity: 1, y: 0 }}
-        animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
-        transition={{ duration: 0.2 }}
-      >
-        <div className="container mx-auto">
-          <ul className="flex items-center justify-center space-x-8">
-            {[
-              { href: "/", label: "Josch" },
-              { href: "/projects", label: "Projects" },
-              { href: "/about", label: "About" },
-            ].map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={`
-                  md:text-base text-[0.875rem] leading-[1.5] transition-all duration-300 ease-in-out
+    <motion.nav
+      className="w-full fixed z-10 bg-bg-primary/50 backdrop-blur-lg py-5 shadow-sm"
+      initial={{ opacity: 1, y: 0 }}
+      animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
+      transition={{ duration: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
+    >
+      <div className="container mx-auto">
+        <ul className="flex items-center justify-center space-x-8">
+          {[
+            { href: "/", label: "Josch" },
+            { href: "/projects", label: "Projects" },
+            { href: "/about", label: "About" },
+          ].map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className={`
+                  md:text-base text-[0.875rem] leading-[1.5] transition-colors duration-300 ease-in-out
                   hover:text-primary
                   ${styles.navLink}
                   ${
@@ -75,14 +73,13 @@ export function Navbar() {
                       : "text-text-tertiary font-normal"
                   }
                 `}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </motion.nav>
-    </AnimatePresence>
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.nav>
   );
 }

@@ -24,8 +24,8 @@ export default function RootLayout({
       <body
         className={`font-geist bg-bg-primary text-text-primary ${geist.className}`}
       >
-        <Navbar />
         <Providers>
+          <Navbar />
           <main>{children}</main>
           <Analytics />
           <SpeedInsights/>

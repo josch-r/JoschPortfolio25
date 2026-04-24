@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useScroll, useSpring, motion, useMotionValueEvent } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface ScrollProgressProps {
@@ -20,74 +21,40 @@ export function ScrollProgress({
   hideScrollbar = true,
   ariaLabel = "Page scroll progress",
 }: ScrollProgressProps) {
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [ariaProgress, setAriaProgress] = useState(0);
+  const { scrollYProgress } = useScroll();
+  const scaleY = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.5 });
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalHeight =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-      const scrollPosition = window.scrollY;
-
-      if (totalHeight > 0) {
-        const progress = (scrollPosition / totalHeight) * 100;
-        setScrollProgress(progress);
-      }
-    };
-
-    // Initial calculation
-    handleScroll();
-
-    // Add event listener
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    // Clean up
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    setAriaProgress(Math.round(v * 100));
+  });
 
   useEffect(() => {
     if (hideScrollbar) {
-      // Add a style tag to hide the scrollbar
       const styleElement = document.createElement("style");
       styleElement.textContent = `
-     html {
-    overflow: scroll;
-    overflow-x: hidden;
-}
-::-webkit-scrollbar {
-    width: 0;  /* Remove scrollbar space */
-    background: transparent;  /* Optional: just make scrollbar invisible */
-}
-/* Optional: show position indicator in red */
-::-webkit-scrollbar-thumb {
-    background: #FF0000;
-}
+        html { overflow: scroll; overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 0; background: transparent; }
       `;
       document.head.appendChild(styleElement);
-
       return () => {
         document.head.removeChild(styleElement);
       };
     }
   }, [hideScrollbar]);
 
-  // Add keyboard navigation for accessibility
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Page Up and Page Down for keyboard navigation
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const behavior = prefersReduced ? "auto" : "smooth";
       if (e.key === "PageUp") {
-        window.scrollBy({ top: -window.innerHeight * 0.9, behavior: "smooth" });
+        window.scrollBy({ top: -window.innerHeight * 0.9, behavior });
       } else if (e.key === "PageDown") {
-        window.scrollBy({ top: window.innerHeight * 0.9, behavior: "smooth" });
+        window.scrollBy({ top: window.innerHeight * 0.9, behavior });
       } else if (e.key === "Home") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({ top: 0, behavior });
       } else if (e.key === "End") {
-        window.scrollTo({
-          top: document.documentElement.scrollHeight,
-          behavior: "smooth",
-        });
+        window.scrollTo({ top: document.documentElement.scrollHeight, behavior });
       }
     };
 
@@ -99,42 +66,32 @@ export function ScrollProgress({
 
   return (
     <>
-    {/* Visually hidden text for screen readers */}
-    <div className="sr-only" aria-live="polite">
-      {Math.round(scrollProgress)}% scrolled
-    </div>
+      <div className="sr-only" aria-live="polite">
+        {ariaProgress}% scrolled
+      </div>
 
-    <div
-      className={cn(
-        "fixed top-0 right-0 h-full",
-        "pointer-events-none",
-        className
-      )}
-      style={{
-        zIndex,
-        width: `${width}px`,
-      }}
-    >
       <div
-        className={cn(
-          "absolute top-0 right-0 w-full bg-neutral-600 ransition-all duration-100 ease-out",
-          color && `bg-[${color}]`
-        )}
-        style={{
-          height: `${scrollProgress}%`,
-          width: `${width}px`,
-        }}
-        role="progressbar"
-        aria-valuenow={Math.round(scrollProgress)}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-label={ariaLabel}
-      />
-      <div
-        className="absolute top-0 right-0 w-full h-full bg-muted/20"
-        style={{ width: `${width}px` }}
-      />
-    </div>
+        className={cn("fixed top-0 right-0 h-full pointer-events-none", className)}
+        style={{ zIndex, width: `${width}px` }}
+      >
+        <div
+          className="absolute top-0 right-0 w-full h-full bg-muted/20"
+          style={{ width: `${width}px` }}
+        />
+        <motion.div
+          className={cn("absolute top-0 right-0 w-full h-full bg-neutral-600", color && `bg-[${color}]`)}
+          style={{
+            scaleY,
+            transformOrigin: "top",
+            width: `${width}px`,
+          }}
+          role="progressbar"
+          aria-valuenow={ariaProgress}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label={ariaLabel}
+        />
+      </div>
     </>
   );
 }

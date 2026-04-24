@@ -48,8 +48,8 @@ export const JoschHead = ({
 
   // Track dragging state
   const [isDragging, setIsDragging] = useState(false)
-  const [lastMouseX, setLastMouseX] = useState(0)
-  const [lastMouseY, setLastMouseY] = useState(0)
+  const lastMouseX = useRef(0)
+  const lastMouseY = useRef(0)
 
   // Track hover state
   const [isHovering, setIsHovering] = useState(false)
@@ -107,10 +107,9 @@ export const JoschHead = ({
 
   // Handle global mouse events for continuous dragging
   useEffect(() => {
-    if (!isDragging || !groupRef.current) return
+    if (!isDragging) return
 
     const handleMouseMove = (e: MouseEvent | TouchEvent) => {
-      // Get client positions from either mouse or touch event
       if ("touches" in e && e.cancelable) {
         e.preventDefault()
       }
@@ -118,11 +117,9 @@ export const JoschHead = ({
       const clientX = "touches" in e ? e.touches[0].clientX : (e as MouseEvent).clientX
       const clientY = "touches" in e ? e.touches[0].clientY : (e as MouseEvent).clientY
 
-      // Calculate deltas
-      const deltaX = clientX - lastMouseX
-      const deltaY = clientY - lastMouseY
+      const deltaX = clientX - lastMouseX.current
+      const deltaY = clientY - lastMouseY.current
 
-      // Update target rotation (not directly updating the mesh)
       targetRotation.current.y = THREE.MathUtils.clamp(
         targetRotation.current.y + deltaX * 0.0015,
         baseRotation[1] - HEAD_CONTROL.maxRotationY,
@@ -135,16 +132,12 @@ export const JoschHead = ({
         baseRotation[0] + HEAD_CONTROL.maxRotationX,
       )
 
-      // Update last position
-      setLastMouseX(clientX)
-      setLastMouseY(clientY)
+      lastMouseX.current = clientX
+      lastMouseY.current = clientY
     }
 
-    const handleEnd = () => {
-      setIsDragging(false)
-    }
+    const handleEnd = () => setIsDragging(false)
 
-    // Add event listeners
     window.addEventListener("mousemove", handleMouseMove, { passive: false })
     window.addEventListener("mouseup", handleEnd)
     window.addEventListener("touchmove", handleMouseMove, { passive: false })
@@ -152,57 +145,41 @@ export const JoschHead = ({
     window.addEventListener("touchcancel", handleEnd)
 
     return () => {
-      // Remove event listeners
       window.removeEventListener("mousemove", handleMouseMove)
       window.removeEventListener("mouseup", handleEnd)
       window.removeEventListener("touchmove", handleMouseMove)
       window.removeEventListener("touchend", handleEnd)
       window.removeEventListener("touchcancel", handleEnd)
     }
-  }, [isDragging, lastMouseX, lastMouseY, baseRotation])
+  }, [isDragging])
 
   useEffect(() => {
     if (isDragging) {
       document.body.style.cursor = "grabbing"
-    } else if (isHovering) {
-      document.body.style.cursor = "grab"
+      document.body.style.overflow = "hidden"
+      document.documentElement.style.overflow = "hidden"
+      document.body.style.touchAction = "none"
     } else {
-      document.body.style.cursor = "default"
+      document.body.style.cursor = isHovering ? "grab" : "default"
+      document.body.style.overflow = ""
+      document.documentElement.style.overflow = ""
+      document.body.style.touchAction = ""
     }
 
     return () => {
       document.body.style.cursor = "default"
+      document.body.style.overflow = ""
+      document.documentElement.style.overflow = ""
+      document.body.style.touchAction = ""
     }
   }, [isDragging, isHovering])
 
   const handlePointerDown = (e: React.PointerEvent) => {
     e.stopPropagation()
+    lastMouseX.current = e.clientX
+    lastMouseY.current = e.clientY
     setIsDragging(true)
-    setLastMouseX(e.clientX)
-    setLastMouseY(e.clientY)
   }
-
-  // Add a useEffect to prevent scrolling when dragging
-useEffect(() => {
-  if (isDragging) {
-    // Prevent scrolling on the document body when dragging
-    document.body.style.overflow = "hidden"
-    document.documentElement.style.overflow = "hidden"
-    document.body.style.touchAction = "none"
-  } else {
-    // Restore normal scrolling when not dragging
-    document.body.style.overflow = ""
-    document.documentElement.style.overflow = ""
-    document.body.style.touchAction = ""
-  }
-
-  return () => {
-    // Cleanup: restore normal scrolling when component unmounts
-    document.body.style.overflow = ""
-    document.documentElement.style.overflow = ""
-    document.body.style.touchAction = ""
-  }
-}, [isDragging])
 
   return (
     <group ref={groupRef} dispose={null} rotation={baseRotation} scale={0.013}>
@@ -253,7 +230,7 @@ type GLTFResult = GLTF & {
 }
 
 const Brille = () => {
-  const { nodes, materials } = useGLTF("/models/brilleSmall2.glb") as GLTFResult
+  const { nodes, materials } = useGLTF("/models/brilleSmall2.glb") as unknown as GLTFResult
 
   return (
     <group dispose={null} position={[2, -25.4, 31.8]} scale={1000} rotation={[-0.79, -0.33, 0.16]}>

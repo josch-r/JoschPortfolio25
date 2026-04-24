@@ -1,15 +1,13 @@
 "use client";
 
-import { Environment } from "@react-three/drei";
+import { Environment, useProgress, Html } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { JoschHead } from "./JoschHead";
 import { createNoise3D } from "simplex-noise";
 import * as THREE from "three";
 import { motion } from "framer-motion";
-import { useProgress } from "@react-three/drei";
-import { Html } from "@react-three/drei";
 
 const NoisePoints = dynamic(() => import("./NoisePoints"), { ssr: false });
 
@@ -42,10 +40,7 @@ const PerformanceMonitor = ({ onPerformanceIssue }: { onPerformanceIssue: () => 
         
         // If we've had several consecutive low FPS measurements
         if (lowFpsCount.current >= consecutiveFramesThreshold) {
-          // console.log(`Performance warning: FPS is ${fps} (below ${fpsThreshold}) for ${lowFpsCount.current} consecutive measurements`);
-          // Trigger model switch
           onPerformanceIssue();
-          // Reset counter after logging to avoid spam
           lowFpsCount.current = 0;
         }
       } else {
@@ -127,42 +122,31 @@ export function HeroScene() {
     setNoiseScale(value);
   };
 
-  // Function to handle performance issues
-  const handlePerformanceIssue = () => {
+  const handlePerformanceIssue = useCallback(() => {
     if (!IsMediumMode && !isLowMode) {
-      console.log("Reloading scene with medium quality model due to performance issues");
       setIsMediumMode(true);
       setModelUrl("/models/josch14kMobile.glb");
       setParticleCount(7000);
-      
-      // Force a complete scene remount by changing the key
       setSceneKey(prevKey => prevKey + 1);
     } else if (!isLowMode) {
       setIsLowMode(true);
-      console.log("Reloading scene with low poly model due to performance issues");
       setModelUrl("/models/josch2k.glb");
       setParticleCount(4000);
       setSceneKey(prevKey => prevKey + 1);
     }
-  };
+  }, [IsMediumMode, isLowMode]);
 
   useEffect(() => {
-    // Simple device detection
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     const isLowPerfDevice = window.navigator.hardwareConcurrency <= 4;
     const cpuCores = window.navigator.hardwareConcurrency || 4;
 
-    // console.log("Device detection:", { isMobile, cpuCores });
-
     if (isMobile || isLowPerfDevice) {
-      setParticleCount(7000); // Lower count for mobile/low-end devices
+      setParticleCount(7000);
       setModelUrl("/models/josch14kMobile.glb");
       setIsMediumMode(true);
-      // setCustomData(7000);
     } else if (cpuCores <= 6) {
-      setParticleCount(10000); // Medium count for mid-range devices
-      // setCustomData(10000);
-      console.log("Medium count for mid-range devices");
+      setParticleCount(10000);
       setModelUrl("/models/josch14kMobile.glb");
       setIsMediumMode(true);
     }
@@ -173,12 +157,13 @@ export function HeroScene() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 1.75 }}
+      transition={{ duration: 0.4, ease: [0.215, 0.61, 0.355, 1] }}
       className="absolute w-full h-[100vh]"
     >
-      <Canvas 
+      <Canvas
         camera={{ position: [0, -1, 10], fov: 60 }}
-        key={sceneKey} // Key to force remount
+        dpr={[1, 1.5]}
+        key={sceneKey}
       >
         <Suspense fallback={<Loader />}>
           <Environment
@@ -206,18 +191,7 @@ export function HeroScene() {
             modelUrl={modelUrl}
           />
           
-          {/* Performance monitoring component */}
           <PerformanceMonitor onPerformanceIssue={handlePerformanceIssue} />
-          
-          {/* <Perf
-            position="bottom-left"
-            customData={{
-              value: particleCount,
-              name: "Particle count" as unknown as number,
-              info: "particles" as unknown as number,
-              round: 0, // No decimal places needed for particle count
-            }}
-          /> */}
         </Suspense>
       </Canvas>
     </motion.div>

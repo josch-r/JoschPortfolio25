@@ -154,14 +154,14 @@ export default function ProjectPage() {
             </p>
             <ul className="list-main">
               <li className="list-item">
-                <ArrowRight size={16} className="transition-all duration-200" />
+                <ArrowRight size={16} />
                 <span>
                   Pre-trigger friction: Interrupts the automatic response to
                   notifications and external triggers
                 </span>
               </li>
               <li className="list-item">
-                <ArrowRight size={16} className="transition-all duration-200" />
+                <ArrowRight size={16} />
                 <span>
                   Pre-action friction: Creates a moment of pause before engaging
                   with digital content

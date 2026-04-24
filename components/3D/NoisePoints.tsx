@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useRef, useMemo } from "react";
+import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { createNoise3D } from "simplex-noise";
 import type * as THREE from "three";
 import { Points, PointMaterial } from "@react-three/drei";
+import { useEffect } from "react";
 
 const noise3D = createNoise3D();
 
@@ -18,16 +19,63 @@ const VELOCITY_FACTOR = 0.05;
 const POINT_SIZE = 0.04;
 const POINT_OPACITY = 0.75;
 
+const particleCache = new Map<number, ParticleData>();
+
+const pseudoRandom = (seed: number) => {
+  const value = Math.sin(seed) * 10000;
+  return value - Math.floor(value);
+};
+
+type ParticleData = {
+  positions: Float32Array;
+  colors: Float32Array;
+  velocities: Float32Array;
+  count: number;
+};
+
 const wrapValue = (value: number, min: number, max: number): number => {
   const range = max - min;
   return ((((value - min) % range) + range) % range) + min;
 };
 
 const resetParticle = (i3: number, positions: Float32Array) => {
-  positions[i3] = (Math.random() - 0.5) * 2 * BOUNDARY_X;
-  positions[i3 + 1] = (Math.random() - 0.5) * 2 * BOUNDARY_Y;
+  positions[i3] = (pseudoRandom(i3 + 1) - 0.5) * 2 * BOUNDARY_X;
+  positions[i3 + 1] = (pseudoRandom(i3 + 2) - 0.5) * 2 * BOUNDARY_Y;
   positions[i3 + 2] =
-    BOUNDARY_Z_FAR + Math.random() * (BOUNDARY_Z_NEAR - BOUNDARY_Z_FAR);
+    BOUNDARY_Z_FAR + pseudoRandom(i3 + 3) * (BOUNDARY_Z_NEAR - BOUNDARY_Z_FAR);
+};
+
+const createParticleData = (count: number): ParticleData => {
+  const positions = new Float32Array(count * 3);
+  const colors = new Float32Array(count * 3);
+  const velocities = new Float32Array(count * 3);
+
+  for (let i = 0; i < count; i++) {
+    const i3 = i * 3;
+    positions[i3] = (pseudoRandom(i3 + 1) - 0.5) * 2 * BOUNDARY_X;
+    positions[i3 + 1] = (pseudoRandom(i3 + 2) - 0.5) * 2 * BOUNDARY_Y;
+    positions[i3 + 2] =
+      pseudoRandom(i3 + 3) * (BOUNDARY_Z_NEAR - BOUNDARY_Z_FAR) +
+      BOUNDARY_Z_FAR;
+    colors[i3] = pseudoRandom(i3 + 4);
+    colors[i3 + 1] = pseudoRandom(i3 + 5);
+    colors[i3 + 2] = pseudoRandom(i3 + 6);
+  }
+
+  return { positions, colors, velocities, count };
+};
+
+const getParticleData = (count: number) => {
+  const cachedParticleData = particleCache.get(count);
+
+  if (cachedParticleData) {
+    return cachedParticleData;
+  }
+
+  const particleData = createParticleData(count);
+  particleCache.set(count, particleData);
+
+  return particleData;
 };
 
 const AgentsScene = React.memo(
@@ -43,26 +91,17 @@ const AgentsScene = React.memo(
     randomness?: number;
   }) => {
     const pointsRef = useRef<THREE.Points>(null);
+    const { positions, colors } = getParticleData(a_count);
+    const velocitiesRef = useRef<Float32Array>(new Float32Array(a_count * 3));
 
-    const [positions, colors, velocities] = useMemo(() => {
-      const positions = new Float32Array(a_count * 3);
-      const colors = new Float32Array(a_count * 3);
-      const velocities = new Float32Array(a_count * 3);
-      for (let i = 0; i < a_count; i++) {
-        const i3 = i * 3;
-        positions[i3] = (Math.random() - 0.5) * 2 * BOUNDARY_X;
-        positions[i3 + 1] = (Math.random() - 0.5) * 2 * BOUNDARY_Y;
-        positions[i3 + 2] =
-          Math.random() * (BOUNDARY_Z_NEAR - BOUNDARY_Z_FAR) + BOUNDARY_Z_FAR;
-        colors[i3] = Math.random();
-        colors[i3 + 1] = Math.random();
-        colors[i3 + 2] = Math.random();
-      }
-      return [positions, colors, velocities];
+    useEffect(() => {
+      velocitiesRef.current = new Float32Array(a_count * 3);
     }, [a_count]);
 
     useFrame(({ clock }) => {
       if (!pointsRef.current) return;
+
+      const velocities = velocitiesRef.current;
 
       const time = clock.getElapsedTime();
       const positionAttribute = pointsRef.current.geometry.getAttribute(
@@ -93,7 +132,7 @@ const AgentsScene = React.memo(
           ) *
           Math.PI *
           2;
-        const randomOffset = Math.random() * randomness;
+        const randomOffset = pseudoRandom(i3 + timeOffset) * randomness;
 
         velocities[i3] =
           velocities[i3] * VELOCITY_FACTOR +
@@ -118,7 +157,7 @@ const AgentsScene = React.memo(
           BOUNDARY_Z_NEAR
         );
 
-        if (Math.random() < RESET_PROBABILITY) {
+        if (pseudoRandom(i3 + timeOffset + 1) < RESET_PROBABILITY) {
           resetParticle(i3, positions);
           velocities[i3] = 0;
           velocities[i3 + 1] = 0;

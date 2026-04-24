@@ -8,10 +8,11 @@ import {
   useScroll,
   motion,
 } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export function Navbar() {
   const pathname = usePathname();
+  const forceVisible = pathname === "/imprint" || pathname === "/privacy-policy";
 
   const { scrollYProgress } = useScroll();
 
@@ -20,6 +21,11 @@ export function Navbar() {
   useMotionValueEvent(scrollYProgress, "change", (current) => {
     // Check if current is not undefined and is a number
     if (typeof current === "number") {
+      if (forceVisible) {
+        setVisible(true);
+        return;
+      }
+
       const direction = current! - scrollYProgress.getPrevious()!;
 
       if (scrollYProgress.get() < 0.05) {
@@ -33,12 +39,6 @@ export function Navbar() {
       }
     }
   });
-
-  useEffect(() => {
-    if (pathname === "/imprint" || pathname === "/privacy-policy") {
-      setVisible(true);
-    }
-  }, [pathname]);
 
   const isActive = (path: string) => {
     if (path === "/" && pathname === "/") return true;

@@ -13,15 +13,29 @@ const NoisePoints = dynamic(() => import("./NoisePoints"), { ssr: false });
 
 const noise3D = createNoise3D();
 
+const pseudoRandom = (seed: number) => {
+  const value = Math.sin(seed) * 10000;
+  return value - Math.floor(value);
+};
+
 // Performance monitoring component with model switching
 const PerformanceMonitor = ({ onPerformanceIssue }: { onPerformanceIssue: () => void }) => {
-  const lastTime = useRef(performance.now());
+  const lastTime = useRef<number | null>(null);
   const frameCount = useRef(0);
   const lowFpsCount = useRef(0);
   const fpsThreshold = 25; // FPS threshold to consider as "bad performance"
   const consecutiveFramesThreshold = 3; // Number of consecutive low FPS frames before logging
 
+  useEffect(() => {
+    lastTime.current = performance.now();
+  }, []);
+
   useFrame(() => {
+    if (lastTime.current === null) {
+      lastTime.current = performance.now();
+      return;
+    }
+
     frameCount.current++;
     
     // Check FPS every 20 frames (more frequent checks)
@@ -58,12 +72,13 @@ const Agent = React.memo(({ radius }: { radius: number }) => {
   const lightRef = useRef<THREE.PointLight>(null);
   const positionRef = useRef(new THREE.Vector3());
   const frameCount = useRef(0);
+  const baseSeed = radius * 100;
 
   // Pre-calculate random values
-  const angleOffset = useRef(Math.random() * Math.PI * 3).current;
-  const distanceOffset = useRef(Math.random() * 4 - 3).current;
-  const speed = useRef(Math.random() * 0.75 + 0.2).current;
-  const noiseOffset = useRef(Math.random() * 100).current;
+  const angleOffset = useRef(pseudoRandom(baseSeed + 1) * Math.PI * 3).current;
+  const distanceOffset = useRef(pseudoRandom(baseSeed + 2) * 4 - 3).current;
+  const speed = useRef(pseudoRandom(baseSeed + 3) * 0.75 + 0.2).current;
+  const noiseOffset = useRef(pseudoRandom(baseSeed + 4) * 100).current;
 
   useFrame(() => {
     frameCount.current += 0.01;
@@ -106,50 +121,80 @@ Agent.displayName = "Agent";
 
 export function HeroScene() {
   const radius = 5;
-  const [stepSize, setStepSize] = useState(0.03);
-  const [noiseScale, setNoiseScale] = useState(0.1);
-  const [modelUrl, setModelUrl] = useState("/models/josch50k4.glb");
-  const [particleCount, setParticleCount] = useState(20000);
-  const [sceneKey, setSceneKey] = useState(0); // Key to force scene remount
-  const [IsMediumMode, setIsMediumMode] = useState(false);
-  const [isLowMode, setIsLowMode] = useState(false);
+  const getInitialSceneState = () => {
+    const hardwareConcurrency = navigator.hardwareConcurrency || 4;
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const isLowPerfDevice = hardwareConcurrency <= 4;
+
+    if (isMobile || isLowPerfDevice) {
+      return {
+        stepSize: 0.03,
+        noiseScale: 0.1,
+        modelUrl: "/models/josch14kMobile.glb",
+        particleCount: 7000,
+        sceneKey: 0,
+        isMediumMode: true,
+        isLowMode: false,
+      };
+    }
+
+    if (hardwareConcurrency <= 6) {
+      return {
+        stepSize: 0.03,
+        noiseScale: 0.1,
+        modelUrl: "/models/josch14kMobile.glb",
+        particleCount: 10000,
+        sceneKey: 0,
+        isMediumMode: true,
+        isLowMode: false,
+      };
+    }
+
+    return {
+      stepSize: 0.03,
+      noiseScale: 0.1,
+      modelUrl: "/models/josch50k4.glb",
+      particleCount: 20000,
+      sceneKey: 0,
+      isMediumMode: false,
+      isLowMode: false,
+    };
+  };
+
+  const [sceneState, setSceneState] = useState(getInitialSceneState);
 
   const handleStepSizeChange = (value: number) => {
-    setStepSize(value);
+    setSceneState((currentState) => ({ ...currentState, stepSize: value }));
   };
 
   const handleNoiseScaleChange = (value: number) => {
-    setNoiseScale(value);
+    setSceneState((currentState) => ({ ...currentState, noiseScale: value }));
   };
 
   const handlePerformanceIssue = useCallback(() => {
-    if (!IsMediumMode && !isLowMode) {
-      setIsMediumMode(true);
-      setModelUrl("/models/josch14kMobile.glb");
-      setParticleCount(7000);
-      setSceneKey(prevKey => prevKey + 1);
-    } else if (!isLowMode) {
-      setIsLowMode(true);
-      setModelUrl("/models/josch2k.glb");
-      setParticleCount(4000);
-      setSceneKey(prevKey => prevKey + 1);
-    }
-  }, [IsMediumMode, isLowMode]);
+    setSceneState((currentState) => {
+      if (!currentState.isMediumMode && !currentState.isLowMode) {
+        return {
+          ...currentState,
+          isMediumMode: true,
+          modelUrl: "/models/josch14kMobile.glb",
+          particleCount: 7000,
+          sceneKey: currentState.sceneKey + 1,
+        };
+      }
 
-  useEffect(() => {
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    const isLowPerfDevice = window.navigator.hardwareConcurrency <= 4;
-    const cpuCores = window.navigator.hardwareConcurrency || 4;
+      if (!currentState.isLowMode) {
+        return {
+          ...currentState,
+          isLowMode: true,
+          modelUrl: "/models/josch2k.glb",
+          particleCount: 4000,
+          sceneKey: currentState.sceneKey + 1,
+        };
+      }
 
-    if (isMobile || isLowPerfDevice) {
-      setParticleCount(7000);
-      setModelUrl("/models/josch14kMobile.glb");
-      setIsMediumMode(true);
-    } else if (cpuCores <= 6) {
-      setParticleCount(10000);
-      setModelUrl("/models/josch14kMobile.glb");
-      setIsMediumMode(true);
-    }
+      return currentState;
+    });
   }, []);
 
   return (
@@ -163,7 +208,7 @@ export function HeroScene() {
       <Canvas
         camera={{ position: [0, -1, 10], fov: 60 }}
         dpr={[1, 1.5]}
-        key={sceneKey}
+        key={sceneState.sceneKey}
       >
         <Suspense fallback={<Loader />}>
           <Environment
@@ -173,9 +218,9 @@ export function HeroScene() {
           />
 
           <NoisePoints
-            count={particleCount}
-            stepSize={stepSize}
-            noiseScale={noiseScale}
+            count={sceneState.particleCount}
+            stepSize={sceneState.stepSize}
+            noiseScale={sceneState.noiseScale}
             randomness={0.02}
           />
           {Array.from({ length: 15 }).map((_, i) => (
@@ -186,9 +231,9 @@ export function HeroScene() {
           <JoschHead
             onStepSizeChange={handleStepSizeChange}
             onNoiseScaleChange={handleNoiseScaleChange}
-            initialStepSize={stepSize}
-            initialNoiseScale={noiseScale}
-            modelUrl={modelUrl}
+            initialStepSize={sceneState.stepSize}
+            initialNoiseScale={sceneState.noiseScale}
+            modelUrl={sceneState.modelUrl}
           />
           
           <PerformanceMonitor onPerformanceIssue={handlePerformanceIssue} />

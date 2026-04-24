@@ -151,7 +151,7 @@ export const JoschHead = ({
       window.removeEventListener("touchend", handleEnd)
       window.removeEventListener("touchcancel", handleEnd)
     }
-  }, [isDragging])
+  }, [isDragging, baseRotation])
 
   useEffect(() => {
     if (isDragging) {
